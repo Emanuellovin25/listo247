@@ -180,11 +180,17 @@
         phase: Math.random() * Math.PI * 2,
       }));
 
+      // El degradado vertical es idéntico para los 7 rayos y solo depende de h.
+      // Lo calculamos una vez por resize en vez de 7 veces por frame.
+      let grad = null;
       const resize = () => {
         dpr = Math.min(window.devicePixelRatio || 1, 2);
         w = host.clientWidth; h = host.clientHeight;
         canvas.width = w * dpr; canvas.height = h * dpr;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        grad = ctx.createLinearGradient(0, 0, 0, h);
+        grad.addColorStop(0, 'rgba(15,181,166,0.16)');
+        grad.addColorStop(1, 'rgba(15,181,166,0)');
       };
       resize();
       window.addEventListener('resize', resize);
@@ -206,9 +212,6 @@
             const sway = Math.sin(t * r.speed + r.phase) * 0.12;
             const cx = (r.base + sway + 0.5) * w;
             const halfW = r.width * w;
-            const grad = ctx.createLinearGradient(0, 0, 0, h);
-            grad.addColorStop(0, 'rgba(15,181,166,0.16)');
-            grad.addColorStop(1, 'rgba(15,181,166,0)');
             ctx.fillStyle = grad;
             ctx.beginPath();
             ctx.moveTo(cx - halfW * 0.4, 0);
