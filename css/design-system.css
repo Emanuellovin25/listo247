@@ -1,0 +1,241 @@
+/* ============================================================
+   AISR — Sistema de diseño "Clínico luminoso"  (tarea 02)
+   Tokens + tipografía + componentes reutilizables + responsive.
+   Carga deferida desde el <head>. Los tokens base (colores, radius,
+   shadow) ya están inline en el critical CSS; aquí los ampliamos
+   (espaciado, escala tipográfica) y construimos los componentes.
+   ============================================================ */
+
+:root{
+  /* ---- Escala de espaciado (4-base) ---- */
+  --s-1:4px;  --s-2:8px;  --s-3:12px; --s-4:16px;
+  --s-6:24px; --s-8:32px; --s-12:48px; --s-16:64px; --s-24:96px;
+
+  /* ---- Escala tipográfica fluida (clamp) ---- */
+  --fs-h1:clamp(2.1rem,1.4rem + 3.2vw,3.4rem);
+  --fs-h2:clamp(1.6rem,1.15rem + 2.1vw,2.5rem);
+  --fs-h3:clamp(1.3rem,1.05rem + 1.2vw,1.7rem);
+  --fs-h4:clamp(1.1rem,1rem + .5vw,1.3rem);
+  --fs-body:clamp(1rem,.97rem + .15vw,1.0625rem);
+  --fs-small:.875rem;
+  --fs-eyebrow:.78rem;
+
+  --lh-tight:1.12;
+  --lh-snug:1.3;
+  --lh-body:1.6;
+
+  --measure:70ch;             /* ancho máximo de lectura cómoda */
+  --header-h:64px;
+}
+
+/* ============================================================
+   Tipografía base
+   ============================================================ */
+body{font-size:var(--fs-body);line-height:var(--lh-body)}
+
+h1,h2,h3,h4{font-family:var(--font-head);letter-spacing:-.02em;color:var(--ink)}
+h1{font-size:var(--fs-h1);font-weight:800;line-height:var(--lh-tight)}
+h2{font-size:var(--fs-h2);font-weight:800;line-height:var(--lh-tight)}
+h3{font-size:var(--fs-h3);font-weight:700;line-height:var(--lh-snug)}
+h4{font-size:var(--fs-h4);font-weight:700;line-height:var(--lh-snug)}
+
+p{color:var(--ink)}
+p.lead{font-size:clamp(1.05rem,1rem + .6vw,1.25rem);color:var(--muted);line-height:1.55}
+.muted{color:var(--muted)}
+.measure{max-width:var(--measure)}
+a{color:var(--primary-deep)}
+
+/* Pequeño helper de "eyebrow" (cejilla) sobre títulos de sección */
+.eyebrow{
+  display:inline-block;font-family:var(--font-body);
+  font-size:var(--fs-eyebrow);font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--primary-deep);
+  background:var(--primary-soft);padding:6px 14px;border-radius:100px;
+}
+
+/* ============================================================
+   Layout / secciones
+   ============================================================ */
+.section{padding-block:clamp(48px,7vw,96px)}
+.section--soft{background:var(--bg-soft)}
+.section__head{max-width:680px;margin-inline:auto;text-align:center;margin-bottom:clamp(28px,4vw,48px)}
+.section__head .eyebrow{margin-bottom:16px}
+.section__head h2{margin-bottom:14px}
+
+/* Rejillas reutilizables (colapsan a 1 columna en móvil) */
+.grid{display:grid;gap:clamp(16px,2.5vw,28px)}
+.grid--2{grid-template-columns:repeat(2,1fr)}
+.grid--3{grid-template-columns:repeat(3,1fr)}
+.grid--auto{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+@media(max-width:768px){
+  .grid--2,.grid--3{grid-template-columns:1fr}
+}
+
+/* ============================================================
+   Botones
+   ============================================================ */
+.btn{
+  --_bg:var(--primary);--_fg:#fff;
+  position:relative;display:inline-flex;align-items:center;justify-content:center;
+  gap:10px;font-family:var(--font-head);font-weight:700;font-size:1rem;line-height:1;
+  padding:14px 24px;border-radius:100px;border:1.5px solid transparent;
+  background:var(--_bg);color:var(--_fg);cursor:pointer;white-space:nowrap;
+  transition:transform .18s ease, box-shadow .25s ease, background .2s ease, color .2s ease;
+  min-height:48px;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(11,124,115,.28)}
+.btn:active{transform:translateY(0)}
+
+/* Botón primario "moderno": flecha que se desliza dentro de un círculo */
+.btn--primary{--_bg:var(--primary);--_fg:#fff}
+.btn--primary:hover{--_bg:var(--primary-deep)}
+.btn .btn__icon{
+  display:grid;place-items:center;width:24px;height:24px;border-radius:50%;
+  background:rgba(255,255,255,.22);overflow:hidden;
+}
+.btn .btn__icon svg{width:14px;height:14px;transition:transform .25s ease}
+.btn:hover .btn__icon svg{animation:btn-arrow .5s ease}
+@keyframes btn-arrow{
+  40%{transform:translateX(140%)}
+  41%{transform:translateX(-140%)}
+  100%{transform:translateX(0)}
+}
+
+/* Botón secundario (outline) */
+.btn--ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn--ghost:hover{background:var(--bg-soft);border-color:var(--primary);box-shadow:none;color:var(--primary-deep)}
+
+/* Botón de WhatsApp */
+.btn--wa{background:#25D366;color:#06321b}
+.btn--wa:hover{background:#1ebe5a;box-shadow:0 12px 28px rgba(37,211,102,.3)}
+
+.btn--lg{padding:18px 32px;font-size:1.0625rem;min-height:56px}
+.btn--block{width:100%}
+
+/* ============================================================
+   Cards (resultado / servicio)
+   ============================================================ */
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:clamp(20px,3vw,28px);box-shadow:var(--shadow);
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.card--link:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(15,27,45,.12);border-color:var(--primary-soft)}
+.card__icon{
+  display:grid;place-items:center;width:48px;height:48px;border-radius:14px;
+  background:var(--primary-soft);color:var(--primary-deep);margin-bottom:16px;
+}
+.card__icon svg{width:24px;height:24px}
+.card h3{margin-bottom:8px}
+.card p{color:var(--muted)}
+
+/* ============================================================
+   Chips / badges (canales, "24/7", "RGPD")
+   ============================================================ */
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:var(--fs-small);font-weight:600;line-height:1;
+  padding:7px 14px;border-radius:100px;border:1px solid var(--line);
+  background:var(--surface);color:var(--ink);
+}
+.chip--accent{background:var(--primary-soft);color:var(--primary-deep);border-color:transparent}
+.chip--ok{background:#E9F8EF;color:#0F7A38;border-color:transparent}
+.chip svg{width:15px;height:15px}
+
+/* ============================================================
+   Bloque de conversación (burbujas estilo mensajería)
+   ============================================================ */
+.chat{
+  display:flex;flex-direction:column;gap:10px;
+  background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);
+  padding:clamp(16px,2.5vw,22px);max-width:420px;
+}
+.chat__head{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.chat__avatar{width:32px;height:32px;border-radius:50%;background:var(--primary-soft);color:var(--primary-deep);display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.chat__name{font-weight:700;font-size:.92rem}
+.chat__meta{font-size:.75rem;color:var(--muted)}
+.bubble{
+  max-width:80%;padding:10px 14px;border-radius:16px;font-size:.94rem;line-height:1.45;
+}
+.bubble--in{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:4px}
+.bubble--out{align-self:flex-end;background:var(--primary);color:#fff;border-bottom-right-radius:4px}
+.bubble__time{display:block;font-size:.68rem;opacity:.7;margin-top:3px}
+
+/* ============================================================
+   Nav (sticky, hamburguesa en móvil)
+   .site-header base ya está en el critical CSS inline del <head>.
+   ============================================================ */
+.nav{display:flex;align-items:center;gap:8px}
+.nav__list{display:flex;align-items:center;gap:4px}
+.nav__link{
+  font-weight:600;font-size:.95rem;color:var(--ink);
+  padding:8px 14px;border-radius:10px;transition:background .18s ease,color .18s ease;
+}
+.nav__link:hover,.nav__link[aria-current="page"]{background:var(--bg-soft);color:var(--primary-deep)}
+.nav__cta{margin-left:8px}
+
+.nav-toggle{
+  display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);
+  background:var(--surface);place-items:center;
+}
+.nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{
+  content:"";display:block;width:20px;height:2px;border-radius:2px;background:var(--ink);
+  transition:transform .25s ease,opacity .2s ease;
+}
+.nav-toggle span::before{transform:translateY(-6px)}
+.nav-toggle span::after{transform:translateY(4px)}
+.nav-toggle[aria-expanded="true"] span{background:transparent}
+.nav-toggle[aria-expanded="true"] span::before{transform:rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span::after{transform:rotate(-45deg) translateY(-2px)}
+
+@media(max-width:860px){
+  .nav-toggle{display:grid}
+  .nav{
+    position:fixed;inset:var(--header-h) 0 auto 0;flex-direction:column;align-items:stretch;
+    gap:4px;background:var(--surface);border-bottom:1px solid var(--line);
+    padding:16px clamp(16px,5vw,40px) 24px;box-shadow:var(--shadow);
+    transform:translateY(-12px);opacity:0;visibility:hidden;
+    transition:transform .25s ease,opacity .2s ease,visibility .2s;
+  }
+  .nav[data-open="true"]{transform:translateY(0);opacity:1;visibility:visible}
+  .nav__list{flex-direction:column;align-items:stretch;gap:2px}
+  .nav__link{padding:12px 14px}
+  .nav__cta{margin:8px 0 0}
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer{
+  background:var(--bg-soft);border-top:1px solid var(--line);
+  margin-top:clamp(48px,8vw,96px);padding-block:clamp(40px,6vw,64px);
+}
+.footer__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(24px,4vw,48px)}
+@media(max-width:768px){.footer__grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.footer__grid{grid-template-columns:1fr}}
+.footer__brand{font-family:var(--font-head);font-weight:800;font-size:1.2rem;display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.footer__brand img{width:28px;height:28px}
+.footer h4{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:14px}
+.footer__links{display:flex;flex-direction:column;gap:10px}
+.footer__links a{color:var(--ink);font-size:.95rem;transition:color .18s ease}
+.footer__links a:hover{color:var(--primary-deep)}
+.footer__channels{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.footer__bottom{
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+  margin-top:clamp(28px,4vw,40px);padding-top:20px;border-top:1px solid var(--line);
+  font-size:.85rem;color:var(--muted);
+}
+
+/* ============================================================
+   Utilidades varias
+   ============================================================ */
+.cluster{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.cluster--center{justify-content:center}
+.stack-sm{display:flex;flex-direction:column;gap:8px}
+.text-center{text-align:center}
+.skip-link{
+  position:absolute;left:8px;top:-48px;z-index:100;
+  background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;
+  transition:top .2s ease;
+}
+.skip-link:focus{top:8px}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aisr.es/sitemap.xml

@@ -1,0 +1,14 @@
+{
+  "name": "AISR",
+  "short_name": "AISR",
+  "description": "Que ningún paciente se quede sin respuesta. Chat, voz y reactivación para clínicas.",
+  "lang": "es-ES",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0FB5A6",
+  "icons": [
+    { "src": "/assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

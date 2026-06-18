@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- ================= SEO (es-ES) =================
+     Plantilla de <head> reutilizable. En cada página se cambian:
+     title, description, canonical, og:url/og:title/og:description y el JSON-LD propio. -->
+<title>AISR — Que ningún paciente se quede sin respuesta</title>
+<meta name="description" content="Chat, voz y reactivación de pacientes para clínicas dentales y médicas. Respondemos cuando tú no puedes, y llenamos tu agenda." />
+<meta name="theme-color" content="#0FB5A6" />
+<link rel="canonical" href="https://aisr.es/" />
+<link rel="alternate" hreflang="es-ES" href="https://aisr.es/" />
+<link rel="alternate" hreflang="x-default" href="https://aisr.es/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content="AISR" />
+<meta property="og:title" content="AISR — Que ningún paciente se quede sin respuesta" />
+<meta property="og:description" content="Chat, voz y reactivación de pacientes para clínicas. Respondemos cuando tú no puedes." />
+<meta property="og:url" content="https://aisr.es/" />
+<meta property="og:image" content="https://aisr.es/assets/og/og-home.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AISR — Que ningún paciente se quede sin respuesta" />
+<meta name="twitter:description" content="Chat, voz y reactivación de pacientes para clínicas." />
+<meta name="twitter:image" content="https://aisr.es/assets/og/og-home.jpg" />
+
+<!-- Iconos / manifest -->
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/assets/icons/icon-180.png" />
+<link rel="manifest" href="/manifest.json" />
+
+<!-- ================= Rendimiento =================
+     preconnect al dominio del widget de chat (ajustar cuando lo facilite el cliente). -->
+<!-- TODO(cliente): preconnect al dominio real del widget de chat. -->
+
+<!-- preload de la fuente principal de cada familia (auto-alojadas, ver /fonts/) -->
+<link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+<!-- Critical CSS inline: tokens + base mínima para pintar above-the-fold sin bloqueo -->
+<style>
+  :root{
+    --bg:#FFFFFF; --bg-soft:#F4F8FB; --surface:#FFFFFF;
+    --ink:#0F1B2D; --muted:#5B6B7B; --line:#E6ECF1;
+    --primary:#0FB5A6; --primary-deep:#0B7C73; --primary-soft:#E6F7F5;
+    --ok:#16A34A; --radius:18px; --shadow:0 10px 40px rgba(15,27,45,.08);
+    --maxw:1120px;
+    --font-head:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,sans-serif;
+    --font-body:'Inter',system-ui,-apple-system,Segoe UI,sans-serif;
+  }
+  body{font-family:var(--font-body);color:var(--ink);background:var(--bg)}
+  .container{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(16px,5vw,40px)}
+  .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
+  .site-header .container{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:var(--font-head);font-weight:800;font-size:1.25rem;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+  .brand img{width:28px;height:28px}
+  .site-header.is-scrolled{background:rgba(255,255,255,.95);box-shadow:0 6px 24px rgba(15,27,45,.06)}
+  /* Hero shell (above-the-fold): contenido completo se construye en la tarea 04 */
+  .hero{position:relative;overflow:hidden;text-align:center;padding-block:clamp(56px,9vw,120px)}
+  .hero__inner{position:relative;z-index:1;max-width:760px;margin-inline:auto}
+</style>
+
+<!-- CSS del sitio. El critical CSS va inline arriba para pintar el above-the-fold;
+     estos se cargan normalmente (compatibles con la CSP estricta de producción). -->
+<link rel="stylesheet" href="/css/reset.css" />
+<link rel="stylesheet" href="/css/fonts.css" />
+<link rel="stylesheet" href="/css/design-system.css" />
+<link rel="stylesheet" href="/css/animations.css" />
+<link rel="stylesheet" href="/css/home.css" />
+<link rel="stylesheet" href="/css/calculadora.css" />
+
+<!-- ================= Schema.org (global: Organization + WebSite) ================= -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://aisr.es/#organization",
+      "name": "AISR",
+      "url": "https://aisr.es/",
+      "logo": "https://aisr.es/assets/icons/icon-512.png",
+      "description": "Chat, voz y reactivación de pacientes para clínicas dentales y médicas.",
+      "sameAs": [],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "availableLanguage": ["es"]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://aisr.es/#website",
+      "url": "https://aisr.es/",
+      "name": "AISR",
+      "inLanguage": "es-ES",
+      "publisher": { "@id": "https://aisr.es/#organization" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://aisr.es/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
+
+<script src="/js/main.js" defer></script>
+<script src="/js/animations.js" defer></script>
+<script src="/js/calculadora.js" defer></script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/" aria-label="AISR — inicio">
+      <img src="/assets/favicon.svg" alt="" width="28" height="28" />
+      AISR
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false"
+            aria-controls="primary-nav" aria-label="Abrir menú">
+      <span></span>
+    </button>
+
+    <nav id="primary-nav" class="nav" aria-label="Principal" data-open="false">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="/servicios.html">Servicios</a></li>
+        <li><a class="nav__link" href="/sobre-nosotros.html">Nosotros</a></li>
+        <li><a class="nav__link" href="/preguntas-frecuentes.html">Preguntas</a></li>
+      </ul>
+      <a class="btn btn--primary nav__cta" href="/reservar.html" data-spark>
+        Reservar llamada
+        <span class="btn__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+               stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===================== 1 · HERO ===================== -->
+  <section class="hero container" data-light-rays>
+    <div class="hero__inner">
+      <span class="eyebrow reveal">Clínicas dentales y médicas</span>
+      <h1 class="reveal" data-reveal-delay="1" style="margin:16px 0">Que ningún paciente se quede sin respuesta, ni a las diez de la noche</h1>
+      <p class="lead reveal" data-reveal-delay="2" style="margin-inline:auto;max-width:560px">
+        Respondemos cuando tú no puedes y llenamos tu agenda: chat, voz y reactivación de pacientes.
+      </p>
+      <div class="cluster cluster--center reveal" data-reveal-delay="3" style="margin-top:28px">
+        <button class="btn btn--primary btn--lg" data-open-chat data-spark>
+          Probar ahora
+          <span class="btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </button>
+        <a class="btn btn--ghost btn--lg" href="/reservar.html">Reservar una llamada</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 2 · EL PROBLEMA ===================== -->
+  <section class="section problema" aria-labelledby="problema-h">
+    <div class="problema__glow parallax" data-speed="0.08" aria-hidden="true"></div>
+    <div class="container">
+      <div class="problema__scene reveal">
+        <span class="problema__clock">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          Son las 21:40
+        </span>
+        <h2 id="problema-h">Un paciente te escribe… y nadie responde.</h2>
+        <p class="lead measure" style="margin-inline:auto">
+          Tu equipo se ha ido a casa. El mensaje se queda sin leer hasta mañana —
+          y para entonces, ese paciente ya ha pedido cita en otra clínica.
+        </p>
+        <span class="problema__missed">Visto a las 09:12. Demasiado tarde.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 3 · CALCULADORA ===================== -->
+  <section id="calculadora" class="section section--soft" aria-labelledby="calc-h">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">Calculadora</span>
+        <h2 id="calc-h">¿Cuánto se te está escapando?</h2>
+        <p class="lead">Mueve los datos de tu consulta y descubre, en tiempo real, los pacientes y el dinero que dejas por el camino cada mes — y lo que puedes recuperar.</p>
+      </div>
+
+      <div class="calc-grid">
+        <!-- INPUTS -->
+        <section class="panel inputs" aria-label="Datos de tu clínica">
+          <div class="presets">
+            <span class="presets-q">¿Qué tipo de consulta tienes?</span>
+            <div class="chips" role="group" aria-label="Tipo de consulta">
+              <button type="button" class="calc-chip" data-val="450" data-noshow="2" data-presu="4">Dental</button>
+              <button type="button" class="calc-chip" data-val="150" data-noshow="1" data-presu="2">Médica</button>
+              <button type="button" class="calc-chip" data-val="350" data-noshow="2" data-presu="5">Estética</button>
+              <button type="button" class="calc-chip" data-val="120" data-noshow="3" data-presu="3">Fisioterapia</button>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="group-head"><h3>Tu clínica</h3><span>lo que ya sabes</span></div>
+            <div class="field">
+              <label for="s-pac">Pacientes que ves a la semana <output id="o-pac">40</output></label>
+              <input type="range" id="s-pac" min="5" max="500" step="1" value="40" aria-describedby="h-pac" />
+              <p class="help" id="h-pac">Los que pasan por tu consulta en una semana normal.</p>
+            </div>
+            <div class="field">
+              <label for="s-val">Lo que te deja de media un paciente <output id="o-val">350 €</output></label>
+              <input type="range" id="s-val" min="50" max="10000" step="10" value="350" aria-describedby="h-val" />
+              <p class="help" id="h-val">Tu ticket medio: tratamiento + revisiones a lo largo del tiempo.</p>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="group-head"><h3>Lo que se te escapa</h3><span>lo que casi nadie mide</span></div>
+            <div class="field">
+              <label for="s-after">Te contactan fuera de horario (a la semana) <output id="o-after">10</output></label>
+              <input type="range" id="s-after" min="0" max="60" step="1" value="10" aria-describedby="h-after" />
+              <p class="help" id="h-after">Llaman o escriben cuando ya has cerrado… y se quedan sin respuesta.</p>
+            </div>
+            <div class="field">
+              <label for="s-noshow">De cada 10 citas, ¿cuántas faltan sin avisar? <output id="o-noshow">2 de 10</output></label>
+              <input type="range" id="s-noshow" min="0" max="10" step="1" value="2" aria-describedby="h-noshow" />
+              <p class="help" id="h-noshow">No-shows: te dejan el sillón parado.</p>
+            </div>
+            <div class="field">
+              <label for="s-presu">De cada 10 presupuestos, ¿cuántos NO aceptan? <output id="o-presu">4 de 10</output></label>
+              <input type="range" id="s-presu" min="0" max="10" step="1" value="4" aria-describedby="h-presu" />
+              <p class="help" id="h-presu">Presupuestos que das y se quedan en un cajón, sin seguimiento.</p>
+            </div>
+          </div>
+
+          <details class="bonus">
+            <summary>Bonus: tu base de datos dormida</summary>
+            <div class="field">
+              <label for="b-db">Pacientes en tu base de datos <output id="o-db">1.500</output></label>
+              <input type="range" id="b-db" min="0" max="50000" step="100" value="1500" aria-describedby="h-db" />
+              <p class="help" id="h-db">Pacientes de siempre que llevan tiempo sin aparecer.</p>
+            </div>
+            <div class="field">
+              <label for="b-val">Lo que deja un paciente que vuelve <output id="o-bval">350 €</output></label>
+              <input type="range" id="b-val" min="50" max="10000" step="10" value="350" aria-describedby="h-bval" />
+              <p class="help" id="h-bval">Puedes bajarlo: muchos vuelven primero solo por una revisión.</p>
+            </div>
+          </details>
+        </section>
+
+        <!-- RESULT -->
+        <aside class="panel result" data-mode="sin">
+          <div class="calc-compare">
+            <label class="neo-toggle">
+              <span class="neo-toggle__label neo-toggle__label--on" data-calc-off>Sin AISR</span>
+              <input type="checkbox" id="calc-switch" role="switch"
+                     aria-label="Comparar lo que se te escapa sin AISR con lo que recuperas con AISR" />
+              <span class="neo-toggle__track"><span class="neo-toggle__thumb"></span></span>
+              <span class="neo-toggle__label" data-calc-on>Con AISR</span>
+            </label>
+          </div>
+
+          <p class="result-label" data-calc-label>Ahora mismo se te escapan cada mes</p>
+          <p class="calc-hero" aria-live="polite"><span id="r-low">0</span> – <span id="r-high">0</span><span class="cur">€/mes</span></p>
+          <p class="result-year">≈ <b><span id="r-ylow">0</span> – <span id="r-yhigh">0</span> €</b> al año</p>
+          <p class="tangible" id="tangible"></p>
+
+          <div class="breakdown" aria-label="De dónde viene">
+            <div class="bd-row">
+              <div class="bd-top"><span class="lbl">Fuera de horario <i class="tag" id="tag-hor">tu mayor fuga</i></span><span class="val" id="bd-hor">—</span></div>
+              <div class="bd-bar"><div class="bd-fill" id="f-hor"></div></div>
+            </div>
+            <div class="bd-row">
+              <div class="bd-top"><span class="lbl">Ausencias / no-shows <i class="tag" id="tag-no">tu mayor fuga</i></span><span class="val" id="bd-no">—</span></div>
+              <div class="bd-bar"><div class="bd-fill" id="f-no"></div></div>
+            </div>
+            <div class="bd-row">
+              <div class="bd-top"><span class="lbl">Presupuestos sin aceptar <i class="tag" id="tag-pre">tu mayor fuga</i></span><span class="val" id="bd-pre">—</span></div>
+              <div class="bd-bar"><div class="bd-fill" id="f-pre"></div></div>
+            </div>
+          </div>
+
+          <div class="bonus-result" id="bonus-box" hidden>
+            <p>Y además, de tu base de datos dormida:</p>
+            <p class="bonus-num">+ <span id="r-bonus">0</span> € <small>una sola vez</small></p>
+            <p class="bonus-note">Escenario conservador: solo un 5 % (<span id="r-dbn">0</span> pacientes) recuperados.</p>
+          </div>
+
+          <p class="recover-line" data-calc-recover>Es justo lo que <strong>AISR</strong> te ayuda a recuperar.</p>
+          <p class="calc-antes" hidden><a href="#antes" data-calc-antes>Velo en tu agenda, antes y después →</a></p>
+
+          <div class="calc-cta">
+            <button class="btn btn--primary" data-open-chat data-spark>
+              Probar ahora
+              <span class="btn__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </button>
+            <a class="btn btn--ghost" href="/reservar.html">Reservar llamada</a>
+          </div>
+
+          <details class="how">
+            <summary>ⓘ Cómo se calcula</summary>
+            <div class="how-body">
+              Sobre 4,33 semanas/mes sumamos tres fugas:<br />
+              • <b>Fuera de horario</b> = contactos × lo que deja un paciente<br />
+              • <b>Ausencias</b> = citas × % de no-shows × valor<br />
+              • <b>Presupuestos</b> = citas × <code>0,35</code> (presupuestos por visita) × % sin aceptar × valor<br /><br />
+              De esa oportunidad total, AISR recupera de forma realista <b>entre el 14 % y el 22 %</b>
+              (14 % = solo algunos canales; 22 % = con chat, voz, recordatorios y seguimiento en marcha).<br />
+              El bonus de base de datos es un cálculo aparte, de una sola vez: <code>5 % × pacientes × valor</code>.
+            </div>
+          </details>
+          <p class="disclaimer">Estimación orientativa basada en tus datos. No es una garantía de resultados.</p>
+
+          <!-- Soft lead-capture: el desglose por WhatsApp, sin presión -->
+          <div class="calc-share">
+            <p class="calc-share__q">¿Te mando este desglose por WhatsApp?</p>
+            <!-- TODO(cliente): sustituir 000000000 por el número real (formato wa.me, sin +). -->
+            <a class="calc-share__btn" href="https://wa.me/000000000" data-calc-wa target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="18" height="18"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1112 20zm4.4-5.6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.2-.4.2-.4.6-1.2a.4.4 0 000-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 00-.7.3 2.8 2.8 0 00-.9 2.1 4.9 4.9 0 001 2.6 11 11 0 004.3 3.8c1.6.6 1.8.5 2.2.5a2.4 2.4 0 001.6-1.1 2 2 0 00.1-1.1c0-.1-.2-.2-.4-.3z"/></svg>
+              Mándamelo por WhatsApp
+            </a>
+            <p class="calc-share__note">Sin compromiso: te llegan tus números, no un comercial detrás.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 4 · ANTES / DESPUÉS ===================== -->
+  <section class="section antes" aria-labelledby="antes-h">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">El cambio</span>
+        <h2 id="antes-h">Tu agenda, antes y después</h2>
+        <p class="lead">Mueve el interruptor y mira la diferencia.</p>
+      </div>
+
+      <div class="antes__toggle reveal">
+        <label class="neo-toggle">
+          <span class="neo-toggle__label" data-toggle-off>Sin AISR</span>
+          <input type="checkbox" id="antes-switch" role="switch" aria-label="Comparar sin AISR y con AISR" />
+          <span class="neo-toggle__track"><span class="neo-toggle__thumb"></span></span>
+          <span class="neo-toggle__label neo-toggle__label--on" data-toggle-on>Con AISR</span>
+        </label>
+      </div>
+
+      <div class="antes__panels reveal">
+        <article class="antes__panel antes__panel--off" data-antes-panel="off">
+          <h3><span class="dot" aria-hidden="true"></span>Sin AISR</h3>
+          <div class="antes__list">
+            <p class="antes__item antes__item--bad">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+              <span>Mensajes y llamadas <b>fuera de horario que se pierden</b>.</span>
+            </p>
+            <p class="antes__item antes__item--bad">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+              <span>Huecos en la agenda por <b>ausencias sin avisar</b>.</span>
+            </p>
+            <p class="antes__item antes__item--bad">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+              <span>Pacientes antiguos que <b>no vuelven</b> y nadie reactiva.</span>
+            </p>
+          </div>
+        </article>
+
+        <article class="antes__panel antes__panel--on" data-antes-panel="on" hidden>
+          <h3><span class="dot" aria-hidden="true"></span>Con AISR</h3>
+          <div class="antes__list">
+            <p class="antes__item antes__item--good">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Se responde <b>24/7 en todos tus canales</b>, también de noche.</span>
+            </p>
+            <p class="antes__item antes__item--good">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span><b>Recordatorios automáticos</b> que reducen las ausencias.</span>
+            </p>
+            <p class="antes__item antes__item--good">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Tu base de datos <b>vuelve a llenar la agenda</b> sola.</span>
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 5 · FLYWHEEL DE CANALES ===================== -->
+  <section class="section section--soft canales" aria-labelledby="canales-h">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">Todos tus canales</span>
+        <h2 id="canales-h">Estés donde estés el paciente, ahí respondemos</h2>
+        <p class="lead">Toca un canal para ver una conversación real.</p>
+      </div>
+
+      <div class="canales__grid">
+        <div class="reveal">
+          <div class="flywheel" role="group" aria-label="Canales: toca uno para ver su conversación">
+            <div class="flywheel__ring">
+              <div class="flywheel__node" style="--angle:0deg">
+                <button class="flywheel__node-inner" type="button" data-channel="whatsapp" aria-pressed="true" aria-label="WhatsApp">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1112 20zm4.4-5.6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.2-.4.2-.4.6-1.2a.4.4 0 000-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 00-.7.3 2.8 2.8 0 00-.9 2.1 4.9 4.9 0 001 2.6 11 11 0 004.3 3.8c1.6.6 1.8.5 2.2.5a2.4 2.4 0 001.6-1.1 2 2 0 00.1-1.1c0-.1-.2-.2-.4-.3z"/></svg>
+                </button>
+              </div>
+              <div class="flywheel__node" style="--angle:72deg">
+                <button class="flywheel__node-inner" type="button" data-channel="sms" aria-pressed="false" aria-label="SMS">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 01-9 8.4 9 9 0 01-3.9-.9L3 20l1-4.1A8.4 8.4 0 0112 3a8.4 8.4 0 019 8.5z"/></svg>
+                </button>
+              </div>
+              <div class="flywheel__node" style="--angle:144deg">
+                <button class="flywheel__node-inner" type="button" data-channel="messenger" aria-pressed="false" aria-label="Messenger">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.3 2 2 6.2 2 11.7c0 2.9 1.2 5.4 3.2 7.1v3.5l3-1.6a11 11 0 003.8.6c5.7 0 10-4.2 10-9.6C22 6.2 17.7 2 12 2zm1 12.9l-2.6-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.4 5.8z"/></svg>
+                </button>
+              </div>
+              <div class="flywheel__node" style="--angle:216deg">
+                <button class="flywheel__node-inner" type="button" data-channel="instagram" aria-pressed="false" aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+                </button>
+              </div>
+              <div class="flywheel__node" style="--angle:288deg">
+                <button class="flywheel__node-inner" type="button" data-channel="voz" aria-pressed="false" aria-label="Voz">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012 4.2 2 2 0 014 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8.1 9.6a16 16 0 006 6l1.1-1.1a2 2 0 012.1-.5c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="flywheel__hub">Tu clínica</div>
+          </div>
+
+          <!-- Fallback estático para reduced-motion / sin JS -->
+          <div class="flywheel-fallback">
+            <p class="muted text-center">Canales disponibles:</p>
+            <ul>
+              <li><span class="chip chip--accent">WhatsApp</span></li>
+              <li><span class="chip chip--accent">SMS</span></li>
+              <li><span class="chip chip--accent">Messenger</span></li>
+              <li><span class="chip chip--accent">Instagram</span></li>
+              <li><span class="chip chip--accent">Voz</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="canales__convos reveal" data-reveal-delay="1">
+          <div class="canales__panel" data-channel-panel="whatsapp">
+            <div class="chat">
+              <div class="chat__head"><span class="chat__avatar">WA</span><span><span class="chat__name">WhatsApp · Clínica</span><span class="chat__meta">en línea · 23:14</span></span></div>
+              <p class="bubble bubble--in">Hola, ¿tenéis hueco esta semana para una limpieza? <span class="bubble__time">23:14</span></p>
+              <p class="bubble bubble--out">¡Hola! Sí 🙂 Tengo el jueves a las 17:30 o el viernes a las 10:00. ¿Cuál te viene mejor? <span class="bubble__time">23:14</span></p>
+              <p class="bubble bubble--in">El jueves a las 17:30. <span class="bubble__time">23:15</span></p>
+              <p class="bubble bubble--out">¡Reservado! Te mando un recordatorio el día antes. ✅ <span class="bubble__time">23:15</span></p>
+            </div>
+          </div>
+
+          <div class="canales__panel" data-channel-panel="sms" hidden>
+            <div class="chat">
+              <div class="chat__head"><span class="chat__avatar">SMS</span><span><span class="chat__name">SMS · Clínica</span><span class="chat__meta">hoy · 08:02</span></span></div>
+              <p class="bubble bubble--out">Hola María, te recordamos tu cita mañana a las 12:00. Responde SÍ para confirmar o NO para cambiarla. <span class="bubble__time">08:02</span></p>
+              <p class="bubble bubble--in">SÍ <span class="bubble__time">08:05</span></p>
+              <p class="bubble bubble--out">¡Gracias! Te esperamos. 🦷 <span class="bubble__time">08:05</span></p>
+            </div>
+          </div>
+
+          <div class="canales__panel" data-channel-panel="messenger" hidden>
+            <div class="chat">
+              <div class="chat__head"><span class="chat__avatar">M</span><span><span class="chat__name">Messenger · Clínica</span><span class="chat__meta">en línea · 20:48</span></span></div>
+              <p class="bubble bubble--in">¿Hacéis blanqueamiento? ¿Cuánto cuesta? <span class="bubble__time">20:48</span></p>
+              <p class="bubble bubble--out">Sí, lo hacemos 😊 Lo vemos en una primera visita sin compromiso para darte el precio exacto según tu caso. ¿Te busco hueco? <span class="bubble__time">20:48</span></p>
+              <p class="bubble bubble--in">Vale, esta semana mejor. <span class="bubble__time">20:49</span></p>
+              <p class="bubble bubble--out">Perfecto, te propongo el miércoles a las 18:15. ¿Lo confirmo? <span class="bubble__time">20:49</span></p>
+            </div>
+          </div>
+
+          <div class="canales__panel" data-channel-panel="instagram" hidden>
+            <div class="chat">
+              <div class="chat__head"><span class="chat__avatar">IG</span><span><span class="chat__name">Instagram · Clínica</span><span class="chat__meta">en línea · 22:30</span></span></div>
+              <p class="bubble bubble--in">Vi vuestro post de ortodoncia invisible 😍 ¿cómo pido cita? <span class="bubble__time">22:30</span></p>
+              <p class="bubble bubble--out">¡Gracias! 🙌 Te lo pongo fácil: dime tu disponibilidad y te reservo una valoración gratuita. <span class="bubble__time">22:30</span></p>
+              <p class="bubble bubble--in">Mañana por la tarde. <span class="bubble__time">22:31</span></p>
+              <p class="bubble bubble--out">Hecho: mañana a las 18:00. Te llega confirmación por aquí. ✅ <span class="bubble__time">22:31</span></p>
+            </div>
+          </div>
+
+          <div class="canales__panel" data-channel-panel="voz" hidden>
+            <div class="chat">
+              <div class="chat__head"><span class="chat__avatar">📞</span><span><span class="chat__name">Llamada · Clínica</span><span class="chat__meta">transcripción · 14:05</span></span></div>
+              <p class="bubble bubble--out">Clínica Dental, buenas tardes, ¿en qué puedo ayudarte? <span class="bubble__time">14:05</span></p>
+              <p class="bubble bubble--in">Hola, quería pedir cita para una revisión. <span class="bubble__time">14:05</span></p>
+              <p class="bubble bubble--out">Claro. Tengo el lunes a las 11:00 o el martes a las 16:30. ¿Cuál prefieres? <span class="bubble__time">14:05</span></p>
+              <p class="bubble bubble--in">El martes a las 16:30. <span class="bubble__time">14:06</span></p>
+              <p class="bubble bubble--out">Perfecto, queda reservado. ¡Hasta el martes! <span class="bubble__time">14:06</span></p>
+            </div>
+          </div>
+
+          <p class="canales__hint">Mismo trato, en cada canal. Toca otro para comparar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 6 · ESCUCHA CÓMO SUENA (VOZ) ===================== -->
+  <section class="section voz" aria-labelledby="voz-h">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">Voice AI</span>
+        <h2 id="voz-h">Escucha cómo suena</h2>
+        <p class="lead">Una voz natural en es-ES que atiende el teléfono y reserva la cita. Sin esperas, sin buzón.</p>
+      </div>
+
+      <div class="voz__card reveal">
+        <button class="voz__play" type="button" data-voz-play aria-label="Reproducir muestra de voz (demostración)">
+          <svg viewBox="0 0 24 24" fill="currentColor" data-voz-icon-play><path d="M8 5v14l11-7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" data-voz-icon-pause hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        </button>
+        <div class="voz__body">
+          <div class="voz__wave" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <p class="voz__transcript"><b>«Clínica Dental, buenas tardes.</b> Te tengo hueco el jueves a las cinco y media, ¿te lo reservo?»</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 7 · QUÉ HACEMOS POR TI ===================== -->
+  <section class="section section--soft" aria-labelledby="hacemos-h">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">Qué hacemos por ti</span>
+        <h2 id="hacemos-h">Cinco formas de llenar tu agenda</h2>
+        <p class="lead">Sin que tu equipo tenga que estar pendiente del móvil.</p>
+      </div>
+
+      <div class="grid grid--auto">
+        <a class="card card--link reveal" href="/servicios.html#chat">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+          <h3>Chat en tu web</h3>
+          <p>Respuesta instantánea a cada visitante, que acaba en cita.</p>
+        </a>
+        <a class="card card--link reveal" data-reveal-delay="1" href="/servicios.html#canales">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div>
+          <h3>Respuestas en todos tus canales</h3>
+          <p>WhatsApp, SMS, Messenger e Instagram, atendidos 24/7.</p>
+        </a>
+        <a class="card card--link reveal" data-reveal-delay="2" href="/servicios.html#voz">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012 4.2 2 2 0 014 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8.1 9.6a16 16 0 006 6l1.1-1.1a2 2 0 012.1-.5c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg></div>
+          <h3>Llamadas atendidas, siempre</h3>
+          <p>El teléfono no vuelve a sonar en vano: se responde y se reserva.</p>
+        </a>
+        <a class="card card--link reveal" href="/servicios.html#reactivacion">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 109-9 9 9 0 00-7 3.3M3 4v3.3H6.3"/></svg></div>
+          <h3>Pacientes que vuelven</h3>
+          <p>Tu base de datos dormida se convierte en citas nuevas.</p>
+        </a>
+        <a class="card card--link reveal" data-reveal-delay="1" href="/servicios.html#resenas">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.9L12 17.8 5.9 21l1.2-6.9-5-4.8 6.9-.9z"/></svg></div>
+          <h3>Más reseñas, sin pedirlas a mano</h3>
+          <p>Reseñas 5★ en Google, automáticas, después de cada visita.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 8 · CTA FINAL ===================== -->
+  <section class="section cta-final" aria-labelledby="cta-h">
+    <div class="container">
+      <div class="cta-final__inner reveal" data-light-rays>
+        <h2 id="cta-h">Pruébalo tú mismo</h2>
+        <p class="lead">Abre el chat y haz como si fueras un paciente. Verás en segundos cómo responde por ti.</p>
+        <div class="cluster cluster--center">
+          <button class="btn btn--primary btn--lg" data-open-chat data-spark>
+            Probar ahora
+            <span class="btn__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                   stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </button>
+          <a class="btn btn--ghost btn--lg" href="/reservar.html">Hablemos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <img src="/assets/favicon.svg" alt="" width="28" height="28" /> AISR
+        </div>
+        <p class="muted measure">Respondemos por ti en todos tus canales y recuperamos pacientes para tu clínica.</p>
+        <div class="footer__channels">
+          <span class="chip chip--ok">24/7</span>
+          <span class="chip chip--accent">RGPD</span>
+        </div>
+      </div>
+      <div>
+        <h4>Sitio</h4>
+        <div class="footer__links">
+          <a href="/servicios.html">Servicios</a>
+          <a href="/sobre-nosotros.html">Nosotros</a>
+          <a href="/preguntas-frecuentes.html">Preguntas frecuentes</a>
+          <a href="/reservar.html">Reservar llamada</a>
+        </div>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <div class="footer__links">
+          <a href="/aviso-legal.html">Aviso legal</a>
+          <a href="/privacidad.html">Política de privacidad</a>
+          <a href="/politica-cookies.html">Política de cookies</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© <span data-year>2026</span> AISR. Todos los derechos reservados.</p>
+      <p class="muted">Hecho en España · es-ES</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

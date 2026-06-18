@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- ================= SEO (es-ES) ================= -->
+<title>Sobre nosotros — Conocemos tu consulta por dentro | AISR</title>
+<meta name="description" content="No somos una agencia de marketing. Ayudamos a clínicas a no perder pacientes por no responder a tiempo. Hablamos como hablarías tú, con respeto al paciente y a sus datos." />
+<meta name="theme-color" content="#0FB5A6" />
+<link rel="canonical" href="https://aisr.es/sobre-nosotros.html" />
+<link rel="alternate" hreflang="es-ES" href="https://aisr.es/sobre-nosotros.html" />
+<link rel="alternate" hreflang="x-default" href="https://aisr.es/sobre-nosotros.html" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content="AISR" />
+<meta property="og:title" content="Sobre nosotros — Conocemos tu consulta por dentro | AISR" />
+<meta property="og:description" content="Las clínicas no pierden pacientes por falta de calidad, sino porque nadie responde a tiempo. Eso es justo lo que resolvemos." />
+<meta property="og:url" content="https://aisr.es/sobre-nosotros.html" />
+<meta property="og:image" content="https://aisr.es/assets/og/og-nosotros.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Sobre nosotros — Conocemos tu consulta por dentro | AISR" />
+<meta name="twitter:description" content="Hablamos como hablarías tú. Sin spam, sin mensajes robóticos." />
+<meta name="twitter:image" content="https://aisr.es/assets/og/og-nosotros.jpg" />
+
+<!-- Iconos / manifest -->
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/assets/icons/icon-180.png" />
+<link rel="manifest" href="/manifest.json" />
+
+<!-- Fuentes auto-alojadas -->
+<link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+<!-- Critical CSS inline: tokens + base mínima -->
+<style>
+  :root{
+    --bg:#FFFFFF; --bg-soft:#F4F8FB; --surface:#FFFFFF;
+    --ink:#0F1B2D; --muted:#5B6B7B; --line:#E6ECF1;
+    --primary:#0FB5A6; --primary-deep:#0B7C73; --primary-soft:#E6F7F5;
+    --ok:#16A34A; --radius:18px; --shadow:0 10px 40px rgba(15,27,45,.08);
+    --maxw:1120px;
+    --font-head:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,sans-serif;
+    --font-body:'Inter',system-ui,-apple-system,Segoe UI,sans-serif;
+  }
+  body{font-family:var(--font-body);color:var(--ink);background:var(--bg)}
+  .container{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(16px,5vw,40px)}
+  .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
+  .site-header .container{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:var(--font-head);font-weight:800;font-size:1.25rem;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+  .brand img{width:28px;height:28px}
+  .site-header.is-scrolled{background:rgba(255,255,255,.95);box-shadow:0 6px 24px rgba(15,27,45,.06)}
+</style>
+
+<!-- CSS del sitio (critical CSS inline arriba; compatibles con la CSP estricta). -->
+<link rel="stylesheet" href="/css/reset.css" />
+<link rel="stylesheet" href="/css/fonts.css" />
+<link rel="stylesheet" href="/css/design-system.css" />
+<link rel="stylesheet" href="/css/animations.css" />
+<link rel="stylesheet" href="/css/paginas.css" />
+
+<!-- ================= Schema.org: BreadcrumbList + Organization ================= -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://aisr.es/" },
+        { "@type": "ListItem", "position": 2, "name": "Sobre nosotros", "item": "https://aisr.es/sobre-nosotros.html" }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "name": "AISR",
+      "url": "https://aisr.es/",
+      "logo": "https://aisr.es/assets/favicon.svg",
+      "description": "Respondemos por las clínicas en todos sus canales y recuperamos pacientes, con un trato cercano y respetuoso con los datos.",
+      "areaServed": "ES",
+      "knowsLanguage": "es-ES"
+    }
+  ]
+}
+</script>
+
+<script src="/js/main.js" defer></script>
+<script src="/js/animations.js" defer></script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/" aria-label="AISR — inicio">
+      <img src="/assets/favicon.svg" alt="" width="28" height="28" />
+      AISR
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false"
+            aria-controls="primary-nav" aria-label="Abrir menú">
+      <span></span>
+    </button>
+
+    <nav id="primary-nav" class="nav" aria-label="Principal" data-open="false">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="/servicios.html">Servicios</a></li>
+        <li><a class="nav__link" href="/sobre-nosotros.html" aria-current="page">Nosotros</a></li>
+        <li><a class="nav__link" href="/preguntas-frecuentes.html">Preguntas</a></li>
+      </ul>
+      <a class="btn btn--primary nav__cta" href="/reservar.html" data-spark>
+        Reservar llamada
+        <span class="btn__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+               stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="page-hero container">
+    <nav class="breadcrumb" aria-label="Migas de pan">
+      <a href="/">Inicio</a> › <span aria-current="page">Sobre nosotros</span>
+    </nav>
+    <span class="eyebrow reveal">Uno de los vuestros</span>
+    <h1 class="reveal" data-reveal-delay="1" style="margin:16px 0">Conocemos tu consulta por dentro</h1>
+    <p class="lead reveal" data-reveal-delay="2">
+      No venimos del marketing. Venimos de mirar cómo se pierde un paciente
+      por una llamada sin responder — y de querer que eso no te vuelva a pasar.
+    </p>
+  </section>
+
+  <!-- ===================== POR QUÉ EXISTIMOS ===================== -->
+  <section class="section" aria-labelledby="por-que-h">
+    <div class="container about-story reveal">
+      <span class="eyebrow" style="margin-bottom:16px">Por qué existimos</span>
+      <h2 id="por-que-h" style="margin-bottom:20px">Las clínicas no pierden pacientes por falta de calidad</h2>
+      <p>
+        Los pierden porque <strong>nadie responde a tiempo</strong>. Una persona busca dentista
+        un domingo por la noche, escribe por WhatsApp, llama mientras tu equipo está
+        ocupado con otro paciente… y nadie contesta. A los diez minutos ya está
+        hablando con la clínica de al lado.
+      </p>
+      <p>
+        No es culpa de tu equipo. Es imposible estar en el sillón, en recepción y al
+        teléfono a la vez. Pero el paciente que no recibe respuesta no espera: se va.
+      </p>
+      <p>
+        Nosotros resolvemos <strong>exactamente eso</strong>. Respondemos por ti en cada canal,
+        a cualquier hora, con el tono de tu consulta. Y los pacientes que llevaban
+        tiempo sin volver, los traemos de vuelta a tu agenda.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== CÓMO TRABAJAMOS ===================== -->
+  <section class="section section--soft" aria-labelledby="como-h">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">Cómo trabajamos</span>
+        <h2 id="como-h">Tres pasos, y tú solo notas el resultado</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step__num">1</div>
+          <h3>Escuchamos tu consulta</h3>
+          <p>Cómo hablas con tus pacientes, qué preguntan, cómo trabajas. Sin tecnicismos.</p>
+        </div>
+        <div class="step reveal" data-reveal-delay="1">
+          <div class="step__num">2</div>
+          <h3>Lo configuramos a tu medida</h3>
+          <p>Lo dejamos listo con tu tono y tus horarios. Tú no tienes que aprender nada.</p>
+        </div>
+        <div class="step reveal" data-reveal-delay="2">
+          <div class="step__num">3</div>
+          <h3>Tú solo ves más pacientes</h3>
+          <p>Respondemos, hacemos seguimiento y reservamos citas. Tú, a lo tuyo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LO QUE NO HACEMOS ===================== -->
+  <section class="section" aria-labelledby="no-h">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">Lo que NO hacemos</span>
+        <h2 id="no-h">Hablamos como hablarías tú</h2>
+      </div>
+      <ul class="nope" style="max-width:760px;margin-inline:auto">
+        <li class="reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          <div><b>Nada de spam</b><span>No bombardeamos a tus pacientes con mensajes que no han pedido.</span></div>
+        </li>
+        <li class="reveal" data-reveal-delay="1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          <div><b>Nada de mensajes robóticos</b><span>Suenan a persona, con el tono cálido de tu consulta.</span></div>
+        </li>
+        <li class="reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          <div><b>Nada de marketing agresivo</b><span>No empujamos tratamientos. Acompañamos, no presionamos.</span></div>
+        </li>
+        <li class="reveal" data-reveal-delay="1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          <div><b>Nada de prometer lo que no somos</b><span>Si algo no lo sabemos, lo derivamos a tu equipo. Sin inventar.</span></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== COMPROMISO RGPD ===================== -->
+  <section class="section section--soft" aria-labelledby="rgpd-h">
+    <div class="container">
+      <div class="rgpd-band reveal">
+        <div class="rgpd-band__seal" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <div>
+          <h2 id="rgpd-h">Los datos de tus pacientes, protegidos</h2>
+          <p>
+            Cumplimos el RGPD y la normativa española de protección de datos.
+            La información de tus pacientes se trata con confidencialidad y nunca
+            se usa para nada que no sea atenderles mejor.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA FINAL ===================== -->
+  <section class="section cta-final" aria-labelledby="cta-h">
+    <div class="container">
+      <div class="cta-final__inner reveal">
+        <h2 id="cta-h">¿Hablamos?</h2>
+        <p class="lead">Cuéntanos cómo funciona tu consulta. En 15 minutos te enseñamos qué cambiaría.</p>
+        <div class="cluster cluster--center">
+          <a class="btn btn--primary btn--lg" href="/reservar.html" data-spark>
+            Hablemos
+            <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+          <a class="btn btn--ghost btn--lg" href="/servicios.html">Ver qué hacemos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <img src="/assets/favicon.svg" alt="" width="28" height="28" /> AISR
+        </div>
+        <p class="muted measure">Respondemos por ti en todos tus canales y recuperamos pacientes para tu clínica.</p>
+        <div class="footer__channels">
+          <span class="chip chip--ok">24/7</span>
+          <span class="chip chip--accent">RGPD</span>
+        </div>
+      </div>
+      <div>
+        <h4>Sitio</h4>
+        <div class="footer__links">
+          <a href="/servicios.html">Servicios</a>
+          <a href="/sobre-nosotros.html">Nosotros</a>
+          <a href="/preguntas-frecuentes.html">Preguntas frecuentes</a>
+          <a href="/reservar.html">Reservar llamada</a>
+        </div>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <div class="footer__links">
+          <a href="/aviso-legal.html">Aviso legal</a>
+          <a href="/privacidad.html">Política de privacidad</a>
+          <a href="/politica-cookies.html">Política de cookies</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© <span data-year>2026</span> AISR. Todos los derechos reservados.</p>
+      <p class="muted">Hecho en España · es-ES</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Botón flotante de WhatsApp · TODO(cliente): sustituir el número -->
+<a class="wa-float" href="https://wa.me/000000000?text=Hola,%20tengo%20una%20cl%C3%ADnica%20y%20quiero%20saber%20m%C3%A1s"
+   target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.82 9.82 0 0 0 1.523 5.26l-.999 3.648 3.965-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+  <span class="wa-float__txt">WhatsApp</span>
+</a>
+
+</body>
+</html>

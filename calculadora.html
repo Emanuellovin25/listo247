@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<!--
+  DEMO standalone de la calculadora "¿Cuánto se te escapa?".
+  En el sitio final será una <section> dentro de index.html con los tokens compartidos.
+  Fuentes: aquí vía Google Fonts para igualar el look; en producción se auto-alojan.
+-->
+<html lang="es-ES">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- Demo standalone no enlazado; su contenido vive en index.html#calculadora. Evitamos contenido duplicado. -->
+<meta name="robots" content="noindex, nofollow" />
+<title>Calculadora — ¿Cuánto se te está escapando? | AISR</title>
+<meta name="description" content="Descubre en tiempo real cuánto dinero deja escapar tu clínica cada mes y cuántos pacientes puedes recuperar." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#FFFFFF; --bg-soft:#F4F8FB; --surface:#FFFFFF;
+    --ink:#0F1B2D; --muted:#5B6B7B; --line:#E6ECF1;
+    --primary:#0FB5A6; --primary-deep:#0B7C73; --primary-soft:#E6F7F5;
+    --ok:#16A34A; --radius:18px; --shadow:0 10px 40px rgba(15,27,45,.08);
+  }
+  body{
+    font-family:'Inter',system-ui,sans-serif; color:var(--ink);
+    background:
+      radial-gradient(60% 50% at 85% -5%, rgba(15,181,166,.07), transparent 70%),
+      var(--bg-soft);
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+    padding:clamp(20px,5vw,64px) clamp(16px,5vw,40px);
+  }
+  .calc{max-width:1120px;margin:0 auto}
+
+  /* Intro */
+  .calc-intro{text-align:center;max-width:680px;margin:0 auto clamp(28px,4vw,48px)}
+  .eyebrow{
+    display:inline-block;font-size:.78rem;font-weight:600;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--primary-deep);
+    background:var(--primary-soft);padding:6px 14px;border-radius:100px;margin-bottom:18px;
+  }
+  .calc-intro h1{
+    font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;
+    font-size:clamp(1.9rem,4.5vw,3rem);line-height:1.08;letter-spacing:-.02em;
+  }
+  .calc-intro .lead{color:var(--muted);font-size:clamp(1rem,2vw,1.15rem);margin-top:16px}
+
+  /* Grid */
+  .calc-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(16px,2.5vw,28px);align-items:start}
+  @media(max-width:860px){.calc-grid{grid-template-columns:1fr}}
+
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .inputs{padding:clamp(20px,3vw,32px)}
+
+  /* Presets */
+  .presets{margin-bottom:6px}
+  .presets-q{display:block;font-weight:600;font-size:.92rem;color:var(--muted);margin-bottom:10px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer;
+    padding:8px 16px;border-radius:100px;border:1.5px solid var(--line);
+    background:#fff;color:var(--ink);transition:all .15s;
+  }
+  .chip:hover{border-color:var(--primary)}
+  .chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+  /* Groups */
+  .group{padding:22px 0 4px}
+  .group + .group{border-top:1px solid var(--line);margin-top:4px}
+  .group-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+  .group-head h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.1rem;font-weight:800}
+  .group-head span{font-size:.82rem;color:var(--muted);font-weight:500}
+
+  /* Fields / sliders */
+  .field{padding:18px 0;border-bottom:1px solid var(--line)}
+  .group .field:last-child{border-bottom:0}
+  .field label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+    font-weight:600;font-size:.98rem;margin-bottom:14px}
+  .field output{
+    font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.05rem;
+    color:var(--primary-deep);background:var(--primary-soft);
+    padding:3px 12px;border-radius:100px;white-space:nowrap;
+  }
+  .help{font-size:.84rem;color:var(--muted);margin-top:10px}
+
+  input[type=range]{
+    -webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:100px;
+    background:var(--line);outline:none;cursor:pointer;
+  }
+  input[type=range]:focus-visible{box-shadow:0 0 0 4px rgba(15,181,166,.25)}
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;
+    background:var(--primary);border:3px solid #fff;box-shadow:0 2px 8px rgba(11,124,115,.4);
+    cursor:grab;transition:transform .15s;
+  }
+  input[type=range]::-webkit-slider-thumb:active{transform:scale(1.15);cursor:grabbing}
+  input[type=range]::-moz-range-thumb{
+    width:24px;height:24px;border-radius:50%;background:var(--primary);
+    border:3px solid #fff;box-shadow:0 2px 8px rgba(11,124,115,.4);cursor:grab;
+  }
+
+  /* Bonus */
+  details.bonus{margin-top:8px;border-top:1px solid var(--line);padding-top:18px}
+  details.bonus summary{
+    list-style:none;cursor:pointer;font-weight:700;color:var(--primary-deep);
+    display:flex;align-items:center;gap:8px;font-size:.95rem;
+  }
+  details.bonus summary::-webkit-details-marker{display:none}
+  details.bonus summary::before{content:'+';font-size:1.2rem;line-height:1;width:14px}
+  details.bonus[open] summary::before{content:'–'}
+  details.bonus .field{padding-top:18px;border-bottom:1px solid var(--line)}
+  details.bonus .field:last-child{border-bottom:0}
+
+  /* Result */
+  .result{padding:clamp(22px,3vw,34px);position:sticky;top:24px;background:linear-gradient(180deg,#fff,#fbfeff)}
+  @media(max-width:860px){.result{position:static}}
+  .result-label{color:var(--muted);font-size:.95rem;font-weight:500}
+  .hero{
+    font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--primary-deep);
+    font-size:clamp(2.1rem,6vw,3.2rem);line-height:1.05;letter-spacing:-.02em;margin:6px 0 4px;
+  }
+  .hero .cur{font-size:.45em;color:var(--muted);font-weight:700;margin-left:6px;letter-spacing:0}
+  .result-year{color:var(--ink);font-weight:600;font-size:1.02rem}
+  .result-year b{color:var(--primary-deep)}
+  .tangible{margin-top:10px;font-size:.98rem;color:var(--ink);background:var(--primary-soft);
+    padding:10px 14px;border-radius:12px;border-left:3px solid var(--primary)}
+  .tangible b{color:var(--primary-deep)}
+
+  .breakdown{margin:22px 0;display:grid;gap:14px}
+  .bd-row{display:grid;gap:6px}
+  .bd-top{display:flex;justify-content:space-between;font-size:.9rem;align-items:center;gap:8px}
+  .bd-top .lbl{color:var(--ink);font-weight:600}
+  .bd-top .val{color:var(--muted);font-weight:600;white-space:nowrap}
+  .tag{display:none;font-size:.7rem;font-weight:700;color:var(--primary-deep);
+    background:var(--primary-soft);padding:2px 8px;border-radius:100px;margin-left:6px;vertical-align:middle}
+  .bd-bar{height:9px;border-radius:100px;background:var(--primary-soft);overflow:hidden}
+  .bd-fill{height:100%;border-radius:100px;background:var(--primary);width:0;transition:width .3s ease}
+
+  .bonus-result{margin:4px 0 20px;padding:16px;border-radius:14px;
+    background:var(--primary-soft);border:1px dashed rgba(15,181,166,.4)}
+  .bonus-result p{font-size:.9rem;color:var(--primary-deep)}
+  .bonus-num{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.5rem;color:var(--primary-deep);margin:2px 0}
+  .bonus-num small{font-size:.55em;font-weight:600;color:var(--muted)}
+  .bonus-note{color:var(--muted)!important;font-size:.8rem!important;margin-top:4px}
+
+  .recover-line{font-size:1.05rem;margin:4px 0 18px}
+  .recover-line strong{color:var(--primary-deep)}
+
+  .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{flex:1;min-width:150px;text-align:center;text-decoration:none;font-weight:700;
+    padding:14px 22px;border-radius:100px;font-size:.98rem;transition:transform .15s,box-shadow .2s,background .2s}
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-primary:hover{background:var(--primary-deep);transform:translateY(-2px);box-shadow:0 10px 26px rgba(11,124,115,.35)}
+  .btn-ghost{background:#fff;color:var(--primary-deep);border:1.5px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--primary);transform:translateY(-2px)}
+
+  details.how{margin-top:20px;font-size:.88rem}
+  details.how summary{cursor:pointer;color:var(--primary-deep);font-weight:600}
+  details.how .how-body{margin-top:12px;padding:14px 16px;background:var(--bg-soft);border-radius:12px;color:var(--muted);line-height:1.7}
+  details.how code{font-family:ui-monospace,Menlo,monospace;color:var(--ink);font-size:.85em}
+  .disclaimer{margin-top:14px;font-size:.78rem;color:var(--muted)}
+
+  @media(prefers-reduced-motion:reduce){.bd-fill{transition:none}.btn:hover,.chip:hover{transform:none}}
+</style>
+</head>
+<body>
+<main class="calc">
+  <header class="calc-intro">
+    <span class="eyebrow">Calculadora</span>
+    <h1>¿Cuánto se te está escapando?</h1>
+    <p class="lead">Mueve los datos de tu consulta y descubre, en tiempo real, los pacientes y el dinero que dejas por el camino cada mes — y lo que puedes recuperar.</p>
+  </header>
+
+  <div class="calc-grid">
+    <!-- INPUTS -->
+    <section class="panel inputs" aria-label="Datos de tu clínica">
+      <div class="presets">
+        <span class="presets-q">¿Qué tipo de consulta tienes?</span>
+        <div class="chips" role="group" aria-label="Tipo de consulta">
+          <button type="button" class="chip" data-val="450">Dental</button>
+          <button type="button" class="chip" data-val="150">Médica</button>
+          <button type="button" class="chip" data-val="350">Estética</button>
+          <button type="button" class="chip" data-val="120">Fisioterapia</button>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-head"><h2>Tu clínica</h2><span>lo que ya sabes</span></div>
+        <div class="field">
+          <label for="s-pac">Pacientes que ves a la semana <output id="o-pac">40</output></label>
+          <input type="range" id="s-pac" min="5" max="500" step="1" value="40" aria-describedby="h-pac" />
+          <p class="help" id="h-pac">Los que pasan por tu consulta en una semana normal.</p>
+        </div>
+        <div class="field">
+          <label for="s-val">Lo que te deja de media un paciente <output id="o-val">350 €</output></label>
+          <input type="range" id="s-val" min="50" max="10000" step="10" value="350" aria-describedby="h-val" />
+          <p class="help" id="h-val">Tu ticket medio: tratamiento + revisiones a lo largo del tiempo.</p>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-head"><h2>Lo que se te escapa</h2><span>lo que casi nadie mide</span></div>
+        <div class="field">
+          <label for="s-after">Te contactan fuera de horario (a la semana) <output id="o-after">10</output></label>
+          <input type="range" id="s-after" min="0" max="60" step="1" value="10" aria-describedby="h-after" />
+          <p class="help" id="h-after">Llaman o escriben cuando ya has cerrado… y se quedan sin respuesta.</p>
+        </div>
+        <div class="field">
+          <label for="s-noshow">De cada 10 citas, ¿cuántas faltan sin avisar? <output id="o-noshow">2 de 10</output></label>
+          <input type="range" id="s-noshow" min="0" max="10" step="1" value="2" aria-describedby="h-noshow" />
+          <p class="help" id="h-noshow">No-shows: te dejan el sillón parado.</p>
+        </div>
+        <div class="field">
+          <label for="s-presu">De cada 10 presupuestos, ¿cuántos NO aceptan? <output id="o-presu">4 de 10</output></label>
+          <input type="range" id="s-presu" min="0" max="10" step="1" value="4" aria-describedby="h-presu" />
+          <p class="help" id="h-presu">Presupuestos que das y se quedan en un cajón, sin seguimiento.</p>
+        </div>
+      </div>
+
+      <details class="bonus">
+        <summary>Bonus: tu base de datos dormida</summary>
+        <div class="field">
+          <label for="b-db">Pacientes en tu base de datos <output id="o-db">1.500</output></label>
+          <input type="range" id="b-db" min="0" max="50000" step="100" value="1500" aria-describedby="h-db" />
+          <p class="help" id="h-db">Pacientes de siempre que llevan tiempo sin aparecer.</p>
+        </div>
+        <div class="field">
+          <label for="b-val">Lo que deja un paciente que vuelve <output id="o-bval">350 €</output></label>
+          <input type="range" id="b-val" min="50" max="10000" step="10" value="350" aria-describedby="h-bval" />
+          <p class="help" id="h-bval">Puedes bajarlo: muchos vuelven primero solo por una revisión.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- RESULT -->
+    <aside class="panel result" aria-live="polite">
+      <p class="result-label">Ahora mismo se te escapan cada mes</p>
+      <p class="hero"><span id="r-low">0</span> – <span id="r-high">0</span><span class="cur">€/mes</span></p>
+      <p class="result-year">≈ <b><span id="r-ylow">0</span> – <span id="r-yhigh">0</span> €</b> al año</p>
+      <p class="tangible" id="tangible"></p>
+
+      <div class="breakdown" aria-label="De dónde viene">
+        <div class="bd-row">
+          <div class="bd-top"><span class="lbl">Fuera de horario <i class="tag" id="tag-hor">tu mayor fuga</i></span><span class="val" id="bd-hor">—</span></div>
+          <div class="bd-bar"><div class="bd-fill" id="f-hor"></div></div>
+        </div>
+        <div class="bd-row">
+          <div class="bd-top"><span class="lbl">Ausencias / no-shows <i class="tag" id="tag-no">tu mayor fuga</i></span><span class="val" id="bd-no">—</span></div>
+          <div class="bd-bar"><div class="bd-fill" id="f-no"></div></div>
+        </div>
+        <div class="bd-row">
+          <div class="bd-top"><span class="lbl">Presupuestos sin aceptar <i class="tag" id="tag-pre">tu mayor fuga</i></span><span class="val" id="bd-pre">—</span></div>
+          <div class="bd-bar"><div class="bd-fill" id="f-pre"></div></div>
+        </div>
+      </div>
+
+      <div class="bonus-result" id="bonus-box" hidden>
+        <p>Y además, de tu base de datos dormida:</p>
+        <p class="bonus-num">+ <span id="r-bonus">0</span> € <small>una sola vez</small></p>
+        <p class="bonus-note">Escenario conservador: solo un 5 % (<span id="r-dbn">0</span> pacientes) recuperados.</p>
+      </div>
+
+      <p class="recover-line">Es justo lo que <strong>AISR</strong> te ayuda a recuperar.</p>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="#" data-widget>Probar ahora</a>
+        <a class="btn btn-ghost" href="#">Reservar llamada</a>
+      </div>
+
+      <details class="how">
+        <summary>ⓘ Cómo se calcula</summary>
+        <div class="how-body">
+          Sobre 4,33 semanas/mes sumamos tres fugas:<br />
+          • <b>Fuera de horario</b> = contactos × lo que deja un paciente<br />
+          • <b>Ausencias</b> = citas × % de no-shows × valor<br />
+          • <b>Presupuestos</b> = citas × <code>0,35</code> (presupuestos por visita) × % sin aceptar × valor<br /><br />
+          De esa oportunidad total, AISR recupera de forma realista <b>entre el 14 % y el 22 %</b>
+          (14 % = solo algunos canales; 22 % = con chat, voz, recordatorios y seguimiento en marcha).<br />
+          El bonus de base de datos es un cálculo aparte, de una sola vez: <code>5 % × pacientes × valor</code>.
+        </div>
+      </details>
+      <p class="disclaimer">Estimación orientativa basada en tus datos. No es una garantía de resultados.</p>
+    </aside>
+  </div>
+</main>
+
+<script>
+(function(){
+  var W=4.33, PRESU_RATE=0.35, LOW=0.14, HIGH=0.22, REACT=0.05;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var nf0 = new Intl.NumberFormat('es-ES',{maximumFractionDigits:0});
+  function num(n){ return nf0.format(Math.max(0,Math.round(n))); }
+  function r10(n){ return Math.round(n/10)*10; }
+  function r100(n){ return Math.round(n/100)*100; }
+
+  var el = function(id){ return document.getElementById(id); };
+  var ranges = ['s-pac','s-val','s-after','s-noshow','s-presu','b-db','b-val'].map(el);
+
+  function fill(r){
+    var p=(r.value-r.min)/(r.max-r.min)*100;
+    r.style.background='linear-gradient(to right, var(--primary) '+p+'%, var(--line) '+p+'%)';
+  }
+  function range(lo, hi){ return num(r10(lo))+' – '+num(r10(hi)); }
+
+  function compute(animate){
+    var A=+el('s-pac').value, V=+el('s-val').value, C=+el('s-after').value,
+        N=+el('s-noshow').value, Q=+el('s-presu').value,
+        DB=+el('b-db').value, BV=+el('b-val').value;
+
+    el('o-pac').textContent=num(A);
+    el('o-val').textContent=num(V)+' €';
+    el('o-after').textContent=num(C);
+    el('o-noshow').textContent=N+' de 10';
+    el('o-presu').textContent=Q+' de 10';
+    el('o-db').textContent=num(DB);
+    el('o-bval').textContent=num(BV)+' €';
+    ranges.forEach(fill);
+
+    var fHor=C*W*V, fNo=A*(N/10)*W*V, fPre=A*PRESU_RATE*(Q/10)*W*V;
+    var G=fHor+fNo+fPre;
+    var mLow=G*LOW, mHigh=G*HIGH;
+
+    setNum('r-low', r10(mLow), animate);
+    setNum('r-high', r10(mHigh), animate);
+    setNum('r-ylow', r100(mLow*12), animate);
+    setNum('r-yhigh', r100(mHigh*12), animate);
+
+    // traducción a pacientes (su idioma)
+    var tl = V>0 ? Math.round(mLow/V) : 0, th = V>0 ? Math.round(mHigh/V) : 0;
+    var t = (tl===th ? tl : tl+'–'+th);
+    el('tangible').innerHTML='≈ <b>'+t+' paciente'+(th===1?'':'s')+'</b> al mes que hoy se quedan por el camino.';
+
+    // breakdown (parte recuperable por fuga)
+    var max=Math.max(fHor,fNo,fPre,1);
+    el('f-hor').style.width=(fHor/max*100)+'%';
+    el('f-no').style.width=(fNo/max*100)+'%';
+    el('f-pre').style.width=(fPre/max*100)+'%';
+    el('bd-hor').textContent=range(fHor*LOW,fHor*HIGH)+' €/mes';
+    el('bd-no').textContent=range(fNo*LOW,fNo*HIGH)+' €/mes';
+    el('bd-pre').textContent=range(fPre*LOW,fPre*HIGH)+' €/mes';
+
+    // resaltar la mayor fuga
+    ['tag-hor','tag-no','tag-pre'].forEach(function(id){ el(id).style.display='none'; });
+    var biggest=Math.max(fHor,fNo,fPre);
+    if(biggest>0){ el(biggest===fHor?'tag-hor':(biggest===fNo?'tag-no':'tag-pre')).style.display='inline-block'; }
+
+    // bonus
+    var box=el('bonus-box'), open=document.querySelector('details.bonus').open && DB>0;
+    box.hidden=!open;
+    if(open){ el('r-bonus').textContent=num(r10(DB*REACT*BV)); el('r-dbn').textContent=num(DB*REACT); }
+  }
+
+  function setNum(id, target, animate){
+    var node=el(id);
+    if(!animate || reduce){ node.textContent=num(target); return; }
+    var start=performance.now(), dur=650;
+    function step(t){
+      var p=Math.min((t-start)/dur,1), eased=1-Math.pow(1-p,3);
+      node.textContent=num(target*eased);
+      if(p<1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  ranges.forEach(function(r){ r.addEventListener('input', function(){ compute(false); }); });
+  document.querySelector('details.bonus').addEventListener('toggle', function(){ compute(false); });
+
+  // presets por tipo de consulta → fijan el ticket medio
+  var chips=document.querySelectorAll('.chip');
+  chips.forEach(function(c){ c.addEventListener('click', function(){
+    chips.forEach(function(x){ x.classList.remove('active'); });
+    c.classList.add('active');
+    el('s-val').value=c.dataset.val;
+    compute(false);
+  });});
+
+  compute(true);
+})();
+</script>
+</body>
+</html>

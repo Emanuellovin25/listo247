@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sitemap AISR. Sustituir https://aisr.es por el dominio real. lastmod a actualizar en cada despliegue. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://aisr.es/</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://aisr.es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aisr.es/"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://aisr.es/servicios.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://aisr.es/servicios.html"/>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://aisr.es/sobre-nosotros.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://aisr.es/sobre-nosotros.html"/>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://aisr.es/reservar.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://aisr.es/reservar.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aisr.es/preguntas-frecuentes.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://aisr.es/preguntas-frecuentes.html"/>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aisr.es/privacidad.html</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://aisr.es/aviso-legal.html</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://aisr.es/politica-cookies.html</loc>
+    <priority>0.3</priority>
+  </url>
+</urlset>
