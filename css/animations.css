@@ -79,7 +79,9 @@
   animation:fly-spin 36s linear infinite;
 }
 .flywheel:hover .flywheel__ring,
-.flywheel:focus-within .flywheel__ring{animation-play-state:paused}
+.flywheel:focus-within .flywheel__ring,
+.flywheel.is-paused .flywheel__ring,
+.flywheel.is-paused .flywheel__node-inner{animation-play-state:paused}
 @keyframes fly-spin{to{transform:rotate(360deg)}}
 
 .flywheel__hub{

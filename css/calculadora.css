@@ -24,7 +24,7 @@
 #calculadora .calc-chip{
   font-family:var(--font-body);font-size:.9rem;font-weight:600;cursor:pointer;
   padding:8px 16px;border-radius:100px;border:1.5px solid var(--line);
-  background:#fff;color:var(--ink);transition:all .15s;
+  background:#fff;color:var(--ink);transition:border-color .15s,background .15s,color .15s;
 }
 #calculadora .calc-chip:hover{border-color:var(--primary)}
 #calculadora .calc-chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}

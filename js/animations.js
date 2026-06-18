@@ -90,6 +90,14 @@
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(n.dataset.channel); }
       });
     });
+
+    // Pausar la rueda (1 giro + 5 contra-giros) cuando no está en pantalla.
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        wheel.classList.toggle('is-paused', !entries[0].isIntersecting);
+      }, { threshold: 0.01 });
+      io.observe(wheel);
+    }
   })();
 
   /* ---------- Click Spark: chispas teal al pulsar los CTA ---------- */
@@ -181,42 +189,58 @@
       resize();
       window.addEventListener('resize', resize);
 
-      let running = true;
-      const draw = (t) => {
-        if (!running) return;
-        ctx.clearRect(0, 0, w, h);
-        ctx.globalCompositeOperation = 'lighter';
-        rays.forEach((r) => {
-          const sway = Math.sin(t * r.speed + r.phase) * 0.12;
-          const cx = (r.base + sway + 0.5) * w;
-          const halfW = r.width * w;
-          const grad = ctx.createLinearGradient(0, 0, 0, h);
-          grad.addColorStop(0, 'rgba(15,181,166,0.16)');
-          grad.addColorStop(1, 'rgba(15,181,166,0)');
-          ctx.fillStyle = grad;
-          ctx.beginPath();
-          ctx.moveTo(cx - halfW * 0.4, 0);
-          ctx.lineTo(cx + halfW * 0.4, 0);
-          ctx.lineTo(cx + halfW, h);
-          ctx.lineTo(cx - halfW, h);
-          ctx.closePath();
-          ctx.fill();
-        });
-        ctx.globalCompositeOperation = 'source-over';
-        requestAnimationFrame(draw);
+      let tabVisible = !document.hidden;   // pestaña en primer plano
+      let inView = true;                    // host dentro del viewport
+      let rafId = null;
+      let last = 0;
+      const FRAME = 1000 / 30;              // tope ~30fps: mitad de trabajo, igual de fluido
+
+      const loop = (t) => {
+        rafId = null;
+        if (!tabVisible || !inView) return; // si no se ve, ni dibujamos ni reprogramamos
+        if (t - last >= FRAME) {
+          last = t;
+          ctx.clearRect(0, 0, w, h);
+          ctx.globalCompositeOperation = 'lighter';
+          rays.forEach((r) => {
+            const sway = Math.sin(t * r.speed + r.phase) * 0.12;
+            const cx = (r.base + sway + 0.5) * w;
+            const halfW = r.width * w;
+            const grad = ctx.createLinearGradient(0, 0, 0, h);
+            grad.addColorStop(0, 'rgba(15,181,166,0.16)');
+            grad.addColorStop(1, 'rgba(15,181,166,0)');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.moveTo(cx - halfW * 0.4, 0);
+            ctx.lineTo(cx + halfW * 0.4, 0);
+            ctx.lineTo(cx + halfW, h);
+            ctx.lineTo(cx - halfW, h);
+            ctx.closePath();
+            ctx.fill();
+          });
+          ctx.globalCompositeOperation = 'source-over';
+        }
+        rafId = requestAnimationFrame(loop);
       };
-      requestAnimationFrame(draw);
+      const kick = () => { if (rafId == null && tabVisible && inView) rafId = requestAnimationFrame(loop); };
+
+      // Exponemos el control de visibilidad para que el IO lo pause/reanude
+      host._raysSetInView = (v) => { inView = v; kick(); };
 
       // Pausar cuando la pestaña no está visible (ahorro de batería)
       document.addEventListener('visibilitychange', () => {
-        running = !document.hidden;
-        if (running) requestAnimationFrame(draw);
+        tabVisible = !document.hidden;
+        kick();
       });
+      kick();
     };
 
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver((entries) => {
-        if (entries.some((e) => e.isIntersecting)) { start(); io.disconnect(); }
+        entries.forEach((e) => {
+          if (e.isIntersecting) start();
+          if (host._raysSetInView) host._raysSetInView(e.isIntersecting);
+        });
       }, { threshold: 0.01 });
       io.observe(host);
     } else {
