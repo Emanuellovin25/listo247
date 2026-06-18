@@ -15,11 +15,16 @@
   background:var(--surface);border:1px solid var(--line);
   border-radius:var(--radius);box-shadow:var(--shadow);
 }
-#calculadora .inputs{padding:clamp(20px,3vw,32px)}
+/* Panel de inputs: fondo en banda suave para que cada bloque blanco
+   (presets + grupos) destaque y la lista deje de leerse apelmazada. */
+#calculadora .inputs{padding:clamp(18px,2.5vw,26px);background:var(--bg-band)}
 
-/* Presets */
-#calculadora .presets{margin-bottom:6px}
-#calculadora .presets-q{display:block;font-weight:600;font-size:.92rem;color:var(--muted);margin-bottom:10px}
+/* Presets (bloque blanco sobre la banda, igual que los grupos) */
+#calculadora .presets{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:16px 16px;margin-bottom:14px;
+}
+#calculadora .presets-q{display:block;font-weight:700;font-size:.92rem;color:var(--ink);margin-bottom:12px}
 #calculadora .chips{display:flex;flex-wrap:wrap;gap:8px}
 #calculadora .calc-chip{
   font-family:var(--font-body);font-size:.9rem;font-weight:600;cursor:pointer;
@@ -29,16 +34,30 @@
 #calculadora .calc-chip:hover{border-color:var(--primary)}
 #calculadora .calc-chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 
-/* Groups */
-#calculadora .group{padding:22px 0 4px}
-#calculadora .group + .group{border-top:1px solid var(--line);margin-top:4px}
-#calculadora .group-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
-#calculadora .group-head h3{font-family:var(--font-head);font-size:1.1rem;font-weight:800;margin:0}
+/* Groups: cada grupo es un bloque blanco bien delimitado dentro de la banda */
+#calculadora .group{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:6px 18px 10px;margin-bottom:14px;
+}
+#calculadora .group:last-of-type{margin-bottom:0}
+#calculadora .group + .group{border-top:0;margin-top:0}
+#calculadora .group-head{
+  display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;
+  margin:0 -18px 6px;padding:14px 18px;border-bottom:1px solid var(--line);
+}
+#calculadora .group-head h3{
+  position:relative;font-family:var(--font-head);font-size:1.08rem;font-weight:800;
+  margin:0;padding-left:14px;
+}
+#calculadora .group-head h3::before{
+  content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:4px;height:18px;border-radius:4px;background:var(--primary);
+}
 #calculadora .group-head span{font-size:.82rem;color:var(--muted);font-weight:500}
 
-/* Fields / sliders */
-#calculadora .field{padding:18px 0;border-bottom:1px solid var(--line)}
-#calculadora .group .field:last-child{border-bottom:0}
+/* Fields / sliders: más aire vertical y separadores más tenues */
+#calculadora .field{padding:22px 0;border-bottom:1px solid var(--line)}
+#calculadora .group .field:last-child{border-bottom:0;padding-bottom:8px}
 #calculadora .field label{
   display:flex;justify-content:space-between;align-items:baseline;gap:12px;
   font-weight:600;font-size:.98rem;margin-bottom:14px;
@@ -66,8 +85,11 @@
   border:3px solid #fff;box-shadow:0 2px 8px rgba(11,124,115,.4);cursor:grab;
 }
 
-/* Bonus */
-#calculadora details.bonus{margin-top:8px;border-top:1px solid var(--line);padding-top:18px}
+/* Bonus (bloque blanco plegable, en línea con presets y grupos) */
+#calculadora details.bonus{
+  margin-top:14px;background:var(--surface);border:1px solid var(--line);
+  border-radius:14px;padding:14px 18px;
+}
 #calculadora details.bonus summary{
   list-style:none;cursor:pointer;font-weight:700;color:var(--primary-deep);
   display:flex;align-items:center;gap:8px;font-size:.95rem;
@@ -75,8 +97,9 @@
 #calculadora details.bonus summary::-webkit-details-marker{display:none}
 #calculadora details.bonus summary::before{content:'+';font-size:1.2rem;line-height:1;width:14px}
 #calculadora details.bonus[open] summary::before{content:'–'}
-#calculadora details.bonus .field{padding-top:18px;border-bottom:1px solid var(--line)}
-#calculadora details.bonus .field:last-child{border-bottom:0}
+#calculadora details.bonus[open] summary{margin-bottom:4px}
+#calculadora details.bonus .field{padding:18px 0;border-bottom:1px solid var(--line)}
+#calculadora details.bonus .field:last-child{border-bottom:0;padding-bottom:4px}
 
 /* Result */
 #calculadora .result{padding:clamp(22px,3vw,34px);position:sticky;top:88px;background:linear-gradient(180deg,#fff,#fbfeff)}

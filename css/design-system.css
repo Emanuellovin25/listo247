@@ -26,6 +26,10 @@
 
   --measure:70ch;             /* ancho máximo de lectura cómoda */
   --header-h:64px;
+
+  /* Banda de sección con contraste claro (alterna con el blanco) */
+  --bg-band:#E9F1F7;
+  --band-line:#D5E2EC;
 }
 
 /* ============================================================
@@ -57,7 +61,11 @@ a{color:var(--primary-deep)}
    Layout / secciones
    ============================================================ */
 .section{padding-block:clamp(48px,7vw,96px)}
-.section--soft{background:var(--bg-soft)}
+/* Banda con contraste real frente al blanco + hairline que delimita el corte */
+.section--soft{
+  background:var(--bg-band);
+  border-block:1px solid var(--band-line);
+}
 .section__head{max-width:680px;margin-inline:auto;text-align:center;margin-bottom:clamp(28px,4vw,48px)}
 .section__head .eyebrow{margin-bottom:16px}
 .section__head h2{margin-bottom:14px}
