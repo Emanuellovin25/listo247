@@ -122,11 +122,14 @@ document.querySelectorAll('[data-year]').forEach(function(el){
     // TODO(cliente): al aceptar, inicializar aquí analytics/píxeles no esenciales.
   }
 
+  var overlay = document.createElement('div');
+  overlay.className = 'cookie-modal';
+
   var card = document.createElement('aside');
   card.className = 'cookie-card';
   card.setAttribute('role','dialog');
+  card.setAttribute('aria-modal','true');
   card.setAttribute('aria-label','Aviso de cookies');
-  card.setAttribute('aria-live','polite');
   card.innerHTML =
     '<div class="cookie-card__head">' +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5Z"/><path d="M8.5 8.5h.01M16 11h.01M11 15h.01"/></svg>' +
@@ -140,20 +143,24 @@ document.querySelectorAll('[data-year]').forEach(function(el){
       '<button type="button" class="btn btn--primary" data-cookie="accept">Aceptar</button>' +
     '</div>';
 
+  overlay.appendChild(card);
+
   function close(value){
     save(value);
-    card.classList.remove('is-in');
-    setTimeout(function(){ card.remove(); }, 400);
+    overlay.classList.remove('is-in');
+    document.documentElement.style.overflow = '';
+    setTimeout(function(){ overlay.remove(); }, 400);
   }
-  card.addEventListener('click', function(e){
+  overlay.addEventListener('click', function(e){
     var b = e.target.closest('[data-cookie]');
     if(b) close(b.getAttribute('data-cookie'));
   });
 
   document.addEventListener('DOMContentLoaded', function(){
-    document.body.appendChild(card);
+    document.body.appendChild(overlay);
+    document.documentElement.style.overflow = 'hidden';
     requestAnimationFrame(function(){
-      requestAnimationFrame(function(){ card.classList.add('is-in'); });
+      requestAnimationFrame(function(){ overlay.classList.add('is-in'); });
     });
   });
 })();

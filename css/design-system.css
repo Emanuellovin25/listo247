@@ -238,6 +238,39 @@ a{color:var(--primary-deep)}
 }
 
 /* ============================================================
+   Banner de cookies — modal centrado (global, inyectado por JS)
+   ============================================================ */
+.cookie-modal{
+  position:fixed;inset:0;z-index:90;
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(16px,4vw,28px);
+  background:rgba(15,27,45,.55);
+  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+  opacity:0;transition:opacity .3s ease;
+}
+.cookie-modal.is-in{opacity:1}
+.cookie-card{
+  width:min(460px,100%);
+  background:var(--surface);border:1px solid var(--line);border-radius:20px;
+  box-shadow:0 24px 70px rgba(15,27,45,.28);padding:26px 28px;
+  transform:translateY(12px) scale(.97);opacity:0;
+  transition:transform .4s cubic-bezier(.22,1,.36,1),opacity .3s ease;
+}
+.cookie-modal.is-in .cookie-card{transform:translateY(0) scale(1);opacity:1}
+.cookie-card__head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.cookie-card__head svg{width:24px;height:24px;color:var(--primary-deep)}
+.cookie-card__head h3{font-size:1.05rem;margin:0}
+.cookie-card p{color:var(--muted);font-size:.92rem;line-height:1.55;margin:0 0 18px}
+.cookie-card p a{color:var(--primary-deep);text-decoration:underline}
+.cookie-card__actions{display:flex;gap:10px;flex-wrap:wrap}
+.cookie-card__actions .btn{flex:1 1 auto;padding:11px 18px;min-height:44px;font-size:.95rem}
+@media(max-width:420px){.cookie-card__actions{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){
+  .cookie-modal,.cookie-card{transition:none}
+  .cookie-card{transform:none}
+}
+
+/* ============================================================
    Utilidades varias
    ============================================================ */
 .cluster{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
