@@ -53,7 +53,15 @@ document.querySelectorAll('[data-year]').forEach(function(el){
   var audio = card.querySelector('[data-voz-audio]');
   var iconPlay = btn.querySelector('[data-voz-icon-play]');
   var iconPause = btn.querySelector('[data-voz-icon-pause]');
+  var ring = btn.querySelector('[data-voz-progress]');
   if(!audio) return;
+
+  var CIRC = 2 * Math.PI * 46; // r=46 en el SVG del anillo
+  function setProgress(frac){
+    if(!ring) return;
+    ring.style.strokeDashoffset = String(CIRC * (1 - Math.max(0, Math.min(1, frac || 0))));
+  }
+  setProgress(0);
 
   function showPlaying(on){
     card.classList.toggle('is-playing', on);
@@ -62,7 +70,10 @@ document.querySelectorAll('[data-year]').forEach(function(el){
   }
   audio.addEventListener('play',  function(){ showPlaying(true);  });
   audio.addEventListener('pause', function(){ showPlaying(false); });
-  audio.addEventListener('ended', function(){ showPlaying(false); audio.currentTime = 0; });
+  audio.addEventListener('timeupdate', function(){
+    if(audio.duration) setProgress(audio.currentTime / audio.duration);
+  });
+  audio.addEventListener('ended', function(){ showPlaying(false); audio.currentTime = 0; setProgress(0); });
 
   btn.addEventListener('click', function(){
     if(audio.paused){

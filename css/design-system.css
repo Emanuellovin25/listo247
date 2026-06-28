@@ -27,6 +27,9 @@
   --measure:70ch;             /* ancho máximo de lectura cómoda */
   --header-h:64px;
 
+  /* Gradiente de marca (teal del logo → azul del "247") */
+  --grad-brand:linear-gradient(120deg,#16D6C0,#5468FF);
+
   /* Banda de sección con contraste claro (alterna con el blanco) */
   --bg-band:#E9F1F7;
   --band-line:#D5E2EC;
@@ -95,8 +98,17 @@ a{color:var(--primary-deep)}
 .btn:active{transform:translateY(0)}
 
 /* Botón primario "moderno": flecha que se desliza dentro de un círculo */
-.btn--primary{--_bg:var(--primary);--_fg:#fff}
+.btn--primary{--_bg:var(--primary);--_fg:#fff;overflow:hidden}
 .btn--primary:hover{--_bg:var(--primary-deep)}
+/* Destello que barre el botón al pasar el ratón */
+.btn--primary::before{
+  content:"";position:absolute;top:0;left:-130%;width:55%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:skewX(-18deg);pointer-events:none;
+}
+.btn--primary:hover::before{animation:btn-shine .7s ease}
+@keyframes btn-shine{to{left:170%}}
+.btn--primary > *{position:relative;z-index:1}
 .btn .btn__icon{
   display:grid;place-items:center;width:24px;height:24px;border-radius:50%;
   background:rgba(255,255,255,.22);overflow:hidden;

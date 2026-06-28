@@ -9,7 +9,7 @@
      title, description, canonical, og:url/og:title/og:description y el JSON-LD propio. -->
 <title>Listo247 — Que ningún paciente se quede sin respuesta</title>
 <meta name="description" content="Chat, voz y reactivación de pacientes para clínicas dentales y médicas. Respondemos cuando tú no puedes, y llenamos tu agenda." />
-<meta name="theme-color" content="#4F6BF6" />
+<meta name="theme-color" content="#0FB5A6" />
 <link rel="canonical" href="https://listo247.es/" />
 <link rel="alternate" hreflang="es-ES" href="https://listo247.es/" />
 <link rel="alternate" hreflang="x-default" href="https://listo247.es/" />
@@ -51,7 +51,7 @@
   :root{
     --bg:#FFFFFF; --bg-soft:#F4F8FB; --surface:#FFFFFF;
     --ink:#0F1B2D; --muted:#5B6B7B; --line:#E6ECF1;
-    --primary:#4F6BF6; --primary-deep:#0B7C73; --primary-soft:#E6F7F5;
+    --primary:#0FB5A6; --primary-deep:#0B7C73; --primary-soft:#E6F7F5;
     --ok:#16A34A; --radius:18px; --shadow:0 10px 40px rgba(15,27,45,.08);
     --maxw:1120px;
     --font-head:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,sans-serif;
@@ -156,7 +156,7 @@
   <section class="hero container" data-light-rays>
     <div class="hero__inner">
       <span class="eyebrow reveal">Clínicas dentales y médicas</span>
-      <h1 class="reveal" data-reveal-delay="1" style="margin:16px 0">Que ningún paciente se quede sin respuesta, ni a las diez de la noche</h1>
+      <h1 class="reveal" data-reveal-delay="1" style="margin:16px 0">Que ningún paciente se quede sin respuesta, <span class="hl">ni a las diez de la noche</span></h1>
       <p class="lead reveal" data-reveal-delay="2" style="margin-inline:auto;max-width:560px">
         Respondemos cuando tú no puedes y llenamos tu agenda: chat, voz y reactivación de pacientes.
       </p>
@@ -520,12 +520,16 @@
       <div class="section__head reveal">
         <span class="eyebrow">Voice AI</span>
         <h2 id="voz-h">Escucha cómo suena</h2>
-        <p class="lead">Una voz natural en es-ES que atiende el teléfono y reserva la cita. Sin esperas, sin buzón.</p>
+        <p class="lead">Una voz natural en español que atiende el teléfono y reserva la cita. Sin esperas, sin buzón.</p>
       </div>
 
       <div class="voz__card reveal">
         <audio data-voz-audio preload="none" src="/assets/audio/voz-demo.mp3"></audio>
         <button class="voz__play" type="button" data-voz-play aria-label="Reproducir muestra de voz (demostración)">
+          <svg class="voz__ring" viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="voz__ring-track" cx="50" cy="50" r="46"/>
+            <circle class="voz__ring-prog" cx="50" cy="50" r="46" data-voz-progress/>
+          </svg>
           <svg viewBox="0 0 24 24" fill="currentColor" data-voz-icon-play><path d="M8 5v14l11-7z"/></svg>
           <svg viewBox="0 0 24 24" fill="currentColor" data-voz-icon-pause hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
         </button>

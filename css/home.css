@@ -118,3 +118,64 @@
 }
 .cta-final h2{margin-bottom:14px}
 .cta-final .lead{margin:0 auto 26px;max-width:520px}
+
+/* ============================================================
+   Mejoras visuales (glow, resaltados, micro-interacciones)
+   ============================================================ */
+
+/* Glow de marca difuso detrás del hero, deriva lenta */
+.hero::after{
+  content:"";position:absolute;inset:-25% -10% auto -10%;height:130%;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(38% 48% at 24% 30%, rgba(22,214,192,.18), transparent 70%),
+    radial-gradient(40% 50% at 80% 36%, rgba(84,104,255,.15), transparent 72%);
+  animation:heroGlow 22s ease-in-out infinite alternate;
+}
+@keyframes heroGlow{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  100%{transform:translate3d(0,-3%,0) scale(1.1)}
+}
+
+/* Frase clave del H1 con gradiente de marca */
+.hl{
+  background:var(--grad-brand);-webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;
+}
+
+/* Reloj "en vivo": respira con un anillo suave */
+.problema__clock{animation:clockPulse 2.6s ease-in-out infinite}
+@keyframes clockPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(15,181,166,0)}
+  50%{box-shadow:0 0 0 7px rgba(15,181,166,.10)}
+}
+/* La línea "demasiado tarde" entra con un beat de retraso */
+.problema__missed{opacity:0;transform:translateY(8px);transition:opacity .6s ease .55s,transform .6s ease .55s}
+.problema__scene.is-in .problema__missed{opacity:1;transform:none}
+
+/* Tarjetas de servicios: elevación + borde de marca al pasar el ratón */
+.card--link{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.card--link:hover{
+  transform:translateY(-5px);
+  box-shadow:0 18px 44px rgba(15,27,45,.12);
+  border-color:rgba(15,181,166,.5);
+}
+
+/* Botón de voz: anillo de progreso real del clip */
+.voz__play{position:relative}
+.voz__ring{
+  position:absolute;inset:-7px;width:calc(100% + 14px);height:calc(100% + 14px);
+  transform:rotate(-90deg);pointer-events:none;
+}
+.voz__ring circle{fill:none;stroke-width:4}
+.voz__ring-track{stroke:rgba(15,181,166,.18)}
+.voz__ring-prog{
+  stroke:var(--primary);stroke-linecap:round;
+  stroke-dasharray:289;stroke-dashoffset:289;transition:stroke-dashoffset .12s linear;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .hero::after{animation:none}
+  .problema__clock{animation:none}
+  .problema__missed{transition:none;opacity:1;transform:none}
+  .card--link:hover{transform:none}
+}
