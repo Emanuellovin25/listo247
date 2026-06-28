@@ -1,4 +1,4 @@
-// main.js — JS base del sitio AISR. Cargado con `defer`, no bloquea el render.
+// main.js — JS base del sitio Listo247. Cargado con `defer`, no bloquea el render.
 // Las animaciones pesadas (WebGL light rays, etc.) se inicializan aparte y gated
 // por prefers-reduced-motion. Aquí solo lo esencial y transversal.
 
@@ -10,7 +10,7 @@
    TODO(cliente): widget link. */
 window.openChatWidget = function openChatWidget(){
   // TODO: reemplazar por la apertura real del widget cuando se integre.
-  console.warn('[AISR] openChatWidget(): pendiente del enlace del widget de chat.');
+  console.warn('[Listo247] openChatWidget(): pendiente del enlace del widget de chat.');
   alert('El chat de demostración se conectará en breve.');
 };
 
@@ -90,9 +90,9 @@ document.querySelectorAll('[data-year]').forEach(function(el){
    Se inyecta en todas las páginas si aún no hay decisión guardada.
    Bloquea cookies no esenciales hasta el consentimiento (aquí no se
    carga ningún script de terceros sin "accept"). 1 año de validez.
-   El estado se expone en window.AISR_COOKIES para futuras integraciones. */
+   El estado se expone en window.Listo247_COOKIES para futuras integraciones. */
 (function cookieBanner(){
-  var KEY = 'aisr-cookie-consent';
+  var KEY = 'listo247-cookie-consent';
   var stored;
   try{ stored = JSON.parse(localStorage.getItem(KEY) || 'null'); }catch(_){ stored = null; }
 
@@ -105,7 +105,7 @@ document.querySelectorAll('[data-year]').forEach(function(el){
     }
   });
 
-  window.AISR_COOKIES = {
+  window.Listo247_COOKIES = {
     accepted: stored && stored.value === 'accept',
     decision: stored ? stored.value : null
   };
@@ -115,7 +115,7 @@ document.querySelectorAll('[data-year]').forEach(function(el){
 
   function save(value){
     try{ localStorage.setItem(KEY, JSON.stringify({ value: value, ts: Date.now() })); }catch(_){}
-    window.AISR_COOKIES = { accepted: value === 'accept', decision: value };
+    window.Listo247_COOKIES = { accepted: value === 'accept', decision: value };
     // TODO(cliente): al aceptar, inicializar aquí analytics/píxeles no esenciales.
   }
 

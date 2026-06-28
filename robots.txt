@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aisr.es/sitemap.xml
+Sitemap: https://listo247.es/sitemap.xml

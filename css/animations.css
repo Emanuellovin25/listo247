@@ -1,5 +1,5 @@
 /* ============================================================
-   AISR — Animaciones (tarea 03)
+   Listo247 — Animaciones (tarea 03)
    Estilos CSS de las animaciones/componentes interactivos.
    La lógica (canvas, observers) está en /js/animations.js.
    Regla de oro: todo respeta prefers-reduced-motion y no bloquea LCP.
@@ -29,7 +29,7 @@
 .parallax{will-change:transform;transform:translate3d(0,var(--parallax,0),0)}
 
 /* ============================================================
-   Neo toggle  ·  "Sin AISR / Con AISR"
+   Neo toggle  ·  "Sin Listo247 / Con Listo247"
    ============================================================ */
 .neo-toggle{display:inline-flex;align-items:center;gap:14px;font-weight:700;color:var(--muted)}
 .neo-toggle__label{transition:color .2s ease}

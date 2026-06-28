@@ -1,5 +1,5 @@
 /* ============================================================
-   AISR — Calculadora «¿Cuánto se te escapa?»  (tarea 11 → integrada en Home)
+   Listo247 — Calculadora «¿Cuánto se te escapa?»  (tarea 11 → integrada en Home)
    Estilos extraídos del DEMO (calculadora.html) y acotados bajo
    #calculadora para no chocar con .btn/.chip/.hero del sistema de diseño.
    Tokens (colores, radius, shadow, fuentes) son los globales.
@@ -151,10 +151,10 @@
 #calculadora details.how code{font-family:ui-monospace,Menlo,monospace;color:var(--ink);font-size:.85em}
 #calculadora .disclaimer{margin-top:14px;font-size:.78rem;color:var(--muted)}
 
-/* Comparativa sin / con AISR (neo-toggle reutilizado de Antes/Después) */
+/* Comparativa sin / con Listo247 (neo-toggle reutilizado de Antes/Después) */
 #calculadora .calc-compare{display:flex;justify-content:center;margin-bottom:20px}
 #calculadora .calc-compare .neo-toggle{font-size:.9rem}
-/* En modo "Con AISR" el héroe pasa a verde "recuperado" para reforzar el mensaje */
+/* En modo "Con Listo247" el héroe pasa a verde "recuperado" para reforzar el mensaje */
 #calculadora .result[data-mode="con"] .calc-hero{color:var(--ok)}
 #calculadora .result[data-mode="con"] .calc-hero .cur{color:var(--muted)}
 #calculadora .calc-antes{margin:-8px 0 16px}

@@ -1,4 +1,4 @@
-/* Reset minimal + box-sizing global. Base para todo el sitio AISR. */
+/* Reset minimal + box-sizing global. Base para todo el sitio Listo247. */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}

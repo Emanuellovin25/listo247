@@ -1,5 +1,5 @@
 /* ============================================================
-   AISR — Animaciones (tarea 03)
+   Listo247 — Animaciones (tarea 03)
    Cargado con `defer`. Todo gated por prefers-reduced-motion y
    lazy-init (IntersectionObserver) para no bloquear el LCP.
    Cada bloque es independiente: si un elemento no existe en la

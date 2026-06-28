@@ -1,5 +1,5 @@
 /* ============================================================
-   AISR — Calculadora «¿Cuánto se te escapa?»  (tarea 11)
+   Listo247 — Calculadora «¿Cuánto se te escapa?»  (tarea 11)
    Lógica de la sección #calculadora del Home. Cargado con `defer`.
    Si la sección no existe en la página, no hace nada.
    Formato es-ES, count-up al cargar, respeta prefers-reduced-motion.
@@ -9,7 +9,7 @@
    · aria-valuetext    → el lector de pantalla dice "350 euros", no solo "350"
    · presets por sector→ fijan ticket + no-shows + aceptación típicos
    · lead-capture WA   → "¿Te mando este desglose por WhatsApp?" prerellenado
-   · comparativa       → neo-toggle sin/con AISR enlazado a Antes/Después
+   · comparativa       → neo-toggle sin/con Listo247 enlazado a Antes/Después
    ============================================================ */
 'use strict';
 
@@ -18,7 +18,7 @@
   if (!root) return;
 
   var W = 4.33, PRESU_RATE = 0.35, LOW = 0.14, HIGH = 0.22, REACT = 0.05;
-  var STORE_KEY = 'aisr-calc-v1';
+  var STORE_KEY = 'listo247-calc-v1';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var nf0 = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 });
@@ -188,7 +188,7 @@
   ranges.forEach(function (r) { r.addEventListener('input', function () { compute(false); }); });
   bonus.addEventListener('toggle', function () { compute(false); });
 
-  // ---------- comparativa sin / con AISR (neo-toggle) ----------
+  // ---------- comparativa sin / con Listo247 (neo-toggle) ----------
   (function compare() {
     var sw = root.querySelector('#calc-switch');
     if (!sw) return;
@@ -202,10 +202,10 @@
     function apply() {
       var con = sw.checked;
       result.setAttribute('data-mode', con ? 'con' : 'sin');
-      label.textContent = con ? 'Con AISR, recuperas cada mes' : 'Ahora mismo se te escapan cada mes';
+      label.textContent = con ? 'Con Listo247, recuperas cada mes' : 'Ahora mismo se te escapan cada mes';
       recover.innerHTML = con
         ? 'El mismo dinero que hoy se escapa, <strong>trabajando para ti</strong>.'
-        : 'Es justo lo que <strong>AISR</strong> te ayuda a recuperar.';
+        : 'Es justo lo que <strong>Listo247</strong> te ayuda a recuperar.';
       if (antes) antes.hidden = !con;
       if (labOff) labOff.classList.toggle('neo-toggle__label--on', !con);
       if (labOn) labOn.classList.toggle('neo-toggle__label--on', con);
@@ -213,7 +213,7 @@
     sw.addEventListener('change', apply);
     apply();
 
-    // el enlace lleva a Antes/Después y deja esa sección ya en "Con AISR"
+    // el enlace lleva a Antes/Después y deja esa sección ya en "Con Listo247"
     var link = root.querySelector('[data-calc-antes]');
     if (link) link.addEventListener('click', function (e) {
       var target = document.getElementById('antes') || document.querySelector('.antes');

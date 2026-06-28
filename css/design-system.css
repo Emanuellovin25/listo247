@@ -1,5 +1,5 @@
 /* ============================================================
-   AISR — Sistema de diseño "Clínico luminoso"  (tarea 02)
+   Listo247 — Sistema de diseño "Clínico luminoso"  (tarea 02)
    Tokens + tipografía + componentes reutilizables + responsive.
    Carga deferida desde el <head>. Los tokens base (colores, radius,
    shadow) ya están inline en el critical CSS; aquí los ampliamos
@@ -223,6 +223,9 @@ a{color:var(--primary-deep)}
 @media(max-width:480px){.footer__grid{grid-template-columns:1fr}}
 .footer__brand{font-family:var(--font-head);font-weight:800;font-size:1.2rem;display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .footer__brand img{width:28px;height:28px}
+/* Logo Listo247 (wordmark horizontal) — sustituye al icono + texto */
+.brand .brand__logo{width:auto;height:30px;display:block}
+.footer__brand .brand__logo{width:auto;height:34px;display:block}
 .footer h4{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:14px}
 .footer__links{display:flex;flex-direction:column;gap:10px}
 .footer__links a{color:var(--ink);font-size:.95rem;transition:color .18s ease}
