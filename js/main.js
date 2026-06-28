@@ -44,30 +44,33 @@ document.querySelectorAll('[data-year]').forEach(function(el){
 })();
 
 /* ---------- Voice AI: reproductor de demostración ----------
-   Anima la onda mientras "suena". El audio real (clip 10s es-ES) se
-   añade en la tarea 09 (assets); aquí simulamos la reproducción.
-   TODO(cliente/assets): enlazar el clip de voz real. */
+   Reproduce el clip de voz real (es-ES) y anima la onda mientras suena.
+   La onda arranca al reproducir y se detiene al pausar o terminar el audio. */
 (function vozPlayer(){
   var btn = document.querySelector('[data-voz-play]');
   if(!btn) return;
   var card = btn.closest('.voz');
+  var audio = card.querySelector('[data-voz-audio]');
   var iconPlay = btn.querySelector('[data-voz-icon-play]');
   var iconPause = btn.querySelector('[data-voz-icon-pause]');
-  var timer = null;
-  function stop(){
-    card.classList.remove('is-playing');
-    iconPlay.hidden = false; iconPause.hidden = true;
-    btn.setAttribute('aria-label','Reproducir muestra de voz (demostración)');
-    if(timer){ clearTimeout(timer); timer = null; }
+  if(!audio) return;
+
+  function showPlaying(on){
+    card.classList.toggle('is-playing', on);
+    iconPlay.hidden = on; iconPause.hidden = !on;
+    btn.setAttribute('aria-label', on ? 'Pausar muestra de voz' : 'Reproducir muestra de voz');
   }
-  function play(){
-    card.classList.add('is-playing');
-    iconPlay.hidden = true; iconPause.hidden = false;
-    btn.setAttribute('aria-label','Pausar muestra de voz');
-    timer = setTimeout(stop, 10000); // duración del clip de muestra
-  }
+  audio.addEventListener('play',  function(){ showPlaying(true);  });
+  audio.addEventListener('pause', function(){ showPlaying(false); });
+  audio.addEventListener('ended', function(){ showPlaying(false); audio.currentTime = 0; });
+
   btn.addEventListener('click', function(){
-    if(card.classList.contains('is-playing')) stop(); else play();
+    if(audio.paused){
+      var p = audio.play();
+      if(p && p.catch) p.catch(function(){ showPlaying(false); });
+    } else {
+      audio.pause();
+    }
   });
 })();
 
